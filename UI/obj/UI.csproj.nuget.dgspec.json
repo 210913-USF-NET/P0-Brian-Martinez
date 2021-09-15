@@ -4,6 +4,59 @@
     "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\UI\\UI.csproj": {}
   },
   "projects": {
+    "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\DL\\DL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\DL\\DL.csproj",
+        "projectName": "DL",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\DL\\DL.csproj",
+        "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\DL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -23,6 +76,62 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj",
+        "projectName": "StoreBL",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj",
+        "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\DL\\DL.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\DL\\DL.csproj"
+              },
+              "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -74,6 +183,9 @@
             "projectReferences": {
               "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj": {
                 "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj"
+              },
+              "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj"
               }
             }
           }

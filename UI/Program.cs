@@ -1,5 +1,7 @@
 ﻿using System;
 using Models;
+using StoreBL;
+using DL;
 
 namespace UI
 {
@@ -13,14 +15,7 @@ namespace UI
             Console.WriteLine("");
             Console.WriteLine("--------------------------------------------------");
             
-            StoreFront myStore = new StoreFront() {
-                Name = "Cherry Hill Beer Garden",
-                Address = "57 Chicago Ave, Garden City, NY"
-            };
-
-            Console.WriteLine(myStore.ToString());
-            myStore.Name = Console.ReadLine();
-            Console.WriteLine(myStore.ToString());
+            new MainMenu(new BL(new ExampleRepo()));
         }
     }
 }
