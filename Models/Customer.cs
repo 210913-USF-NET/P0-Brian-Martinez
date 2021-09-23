@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
     public class Customer
     {
-        public Customer() {}
+        public Customer() {
+            this.Orders = new List<Order>();
+        }
 
-        public Customer(string firstname)
+        public Customer(string firstname) : this()
         {
             this.FirstName = firstname;
         }
@@ -36,7 +39,8 @@ namespace Models
         public int Age {get; set;}
         public string State {get; set;}
         // public long Phone {get; set;}
-
+        public List<Order> Orders {get; set;}
+ 
         public override string ToString()
         {
             return $"NAME: {this.LastName}, {this.FirstName} | AGE: {this.Age}, | STATE: {this.State}";

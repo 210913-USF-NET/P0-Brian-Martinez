@@ -17,7 +17,7 @@ namespace UI
 
         public void Start()
         { 
-            Console.WriteLine("Welcome to Brian's Store!");
+            Console.WriteLine("Welcome to The Beer Garden's console app!");
             bool exit = false;
             string input = "";
             do
