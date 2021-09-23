@@ -72,9 +72,16 @@ namespace UI
         private void ViewAllCustomers()
         {
             List<Customer> allCustomers = _bl.GetAllCustomers();
-            foreach (Customer customer in allCustomers)
+            if (allCustomers.Count == 0)
             {
-                Console.WriteLine(customer.ToString());
+                Console.WriteLine("There are no existing customers");
+            }
+            else
+            {
+                foreach (Customer customer in allCustomers)
+                {
+                    Console.WriteLine(customer.ToString());
+                }
             }
         }
     }
