@@ -2,21 +2,20 @@ using System;
 
 namespace UI
 {
-    public class BrianMenu : IMenu
+    public class BrianLocationMenu : IMenu
     {
         public void Start()
         {
             bool exit = false;
             do
             {
-                Console.WriteLine("Welcome Master!");
-                Console.WriteLine("[1] Manage Locations");
-                Console.WriteLine("[x] Back to Main Menu");
+                Console.WriteLine("[1] Restock Inventory");
+                Console.WriteLine("[x] Back to Admin Menu");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        new BrianChooseLocationMenu().Start();
+                        Console.WriteLine("Restocking inventory");
                         break;
                     case "x":
                         exit = true;

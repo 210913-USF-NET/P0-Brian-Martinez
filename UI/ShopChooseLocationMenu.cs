@@ -1,9 +1,22 @@
+using System;
+using StoreBL;
+using System.Collections.Generic;
+using Models;
+
 namespace UI
 {
-    public class ShopChooseLocationMenu
+    public class ShopChooseLocationMenu : IMenu
     {
+        private IBL _bl;
+
+        public ShopChooseLocationMenu(IBL bl)
+        {
+            _bl = bl;
+        }
+
         public void Start()
         {
+
             bool exit = false;
             do
             {
@@ -12,7 +25,7 @@ namespace UI
                 Console.WriteLine("[2] Downtown Beer Garden");
                 Console.WriteLine("[3] Seaside Beer Garden");
                 Console.WriteLine("[4] Mount Pine Beer Garden");
-                Console.WriteLine("[x] Back to Admin Menu");
+                Console.WriteLine("[x] Back to Main Menu");
 
                 switch (Console.ReadLine())
                 {
@@ -48,3 +61,24 @@ namespace UI
         }
     }
 }
+            // itemStart:
+            // Console.WriteLine("Please select the product you would like to buy");
+            // List<LineItem> allLineItems = _bl.GetAllLineItems();
+            // for (int i = 0; i < allLineItems.Count; i++)
+            // {
+            //     Console.WriteLine($"[{i}] {allLineItems[i]}");
+            // }
+            // string input = Console.ReadLine();
+            // int parsedInput;
+
+            // bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            // if(parseSuccess && parsedInput >= 1 && parsedInput < allLineItems.Count)
+            // {
+            //     LineItem selectedLineItem = allLineItems[parsedInput];
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Invalid Input");
+            //     goto itemStart;
+            // }

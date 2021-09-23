@@ -32,7 +32,7 @@ namespace UI
                 {
                     case "1":
                         CreateCustomer();
-                        new CustomerMenu().Start();
+                        new CustomerMenu(new BL(new FileRepo())).Start();
                         break;
                     case "2":
                         ViewAllCustomers();
@@ -60,12 +60,12 @@ namespace UI
             string lastname = Console.ReadLine();
             Console.Write("Age: ");
             int age = Convert.ToInt32(Console.ReadLine());
-            Console.Write("State: ");
-            string state = Console.ReadLine();
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
             // Console.WriteLine("Phone:");
             // string phone = Console.ReadLine();
 
-            Customer newCustomer = new Customer(firstname, lastname, age, state);
+            Customer newCustomer = new Customer(firstname, lastname, age, email);
             // phone
             _bl.AddCustomer(newCustomer);
             Console.WriteLine(newCustomer.ToString());
