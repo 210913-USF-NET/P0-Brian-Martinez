@@ -42,7 +42,7 @@ namespace UI
                         exit = true;
                         break;
                     case "brian":
-                        Console.WriteLine("Welcome master!");
+                        new BrianMenu().Start();
                         break;
                     default:
                         Console.WriteLine("Invalid input");
@@ -54,8 +54,10 @@ namespace UI
         private void CreateCustomer()
         {
             Console.WriteLine("Creating new customer");
-            Console.Write("Name: ");
-            string name = Console.ReadLine();
+            Console.Write("First Name: ");
+            string firstname = Console.ReadLine();
+            Console.Write("Last Name: ");
+            string lastname = Console.ReadLine();
             Console.Write("Age: ");
             int age = Convert.ToInt32(Console.ReadLine());
             Console.Write("State: ");
@@ -63,7 +65,7 @@ namespace UI
             // Console.WriteLine("Phone:");
             // string phone = Console.ReadLine();
 
-            Customer newCustomer = new Customer(name, age, state);
+            Customer newCustomer = new Customer(firstname, lastname, age, state);
             // phone
             _bl.AddCustomer(newCustomer);
             Console.WriteLine(newCustomer.ToString());

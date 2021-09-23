@@ -15,7 +15,13 @@ namespace DL
 
         public Customer AddCustomer(Customer customer)
         {
-            throw new System.NotImplementedException();
+            List<Customer> allCustomers = GetAllCustomers();
+            allCustomers.Add(customer);
+
+            jsonString = JsonSerializer.Serialize(customer);
+            File.WriteAllText(filePath, jsonString);
+            
+            return customer;
         }
 
         public List<Customer> GetAllCustomers()

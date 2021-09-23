@@ -15,7 +15,8 @@ namespace DL
             {
                 new Customer()
                 {
-                    Name = "Brian Martinez",
+                    FirstName = "Brian",
+                    LastName = "Martinez",
                     Age = 22,
                     State = "NY"
                 }
