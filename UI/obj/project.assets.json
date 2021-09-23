@@ -2,6 +2,20 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DL": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BL.dll": {}
+        }
+      },
       "DL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -24,24 +38,15 @@
         "runtime": {
           "bin/placeholder/Models.dll": {}
         }
-      },
-      "StoreBL/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "dependencies": {
-          "DL": "1.0.0",
-          "Models": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/StoreBL.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/StoreBL.dll": {}
-        }
       }
     }
   },
   "libraries": {
+    "BL/1.0.0": {
+      "type": "project",
+      "path": "../BL/BL.csproj",
+      "msbuildProject": "../BL/BL.csproj"
+    },
     "DL/1.0.0": {
       "type": "project",
       "path": "../DL/DL.csproj",
@@ -51,17 +56,12 @@
       "type": "project",
       "path": "../Models/Models.csproj",
       "msbuildProject": "../Models/Models.csproj"
-    },
-    "StoreBL/1.0.0": {
-      "type": "project",
-      "path": "../StoreBL/StoreBL.csproj",
-      "msbuildProject": "../StoreBL/StoreBL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Models >= 1.0.0",
-      "StoreBL >= 1.0.0"
+      "BL >= 1.0.0",
+      "Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -70,11 +70,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\UI\\UI.csproj",
+      "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj",
       "projectName": "UI",
-      "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\UI\\UI.csproj",
+      "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj",
       "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\UI\\obj\\",
+      "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -82,15 +82,18 @@
       "originalTargetFrameworks": [
         "net5.0"
       ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\Models\\Models.csproj"
+            "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj": {
+              "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj"
             },
-            "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj": {
-              "projectPath": "C:\\Users\\brian\\Documents\\Revature\\Week 1\\P0-Brian-Martinez\\StoreBL\\StoreBL.csproj"
+            "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj"
             }
           }
         }

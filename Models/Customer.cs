@@ -6,26 +6,35 @@ namespace Models
     {
         public Customer() {}
 
-        //Constructor overloading (this is an example of polymorphism)
-        //The constructor behaves differently depending on what is passed in it
-        public Customer(string name) 
+        public Customer(string name)
         {
             this.Name = name;
         }
 
-        //constructor chaninng is done if the user does not provide age
         public Customer(string name, int age) : this(name)
         {
             this.Age = age;
         }
 
-        public Customer(string name, int age, string city) : this(name, age)
+        public Customer(string name, int age, string state) : this(name, age)
         {
-            this.City = city;
+            this.State = state;
         }
+
+        // public Customer(string name, int age, string state, long phone) : this(name, age, state)
+        // {
+        //     this.Phone = phone;
+        // }
 
         public string Name {get; set;}
         public int Age {get; set;}
-        public string City {get; set;}
+        public string State {get; set;}
+        // public long Phone {get; set;}
+
+        public override string ToString()
+        {
+            return $"Name: {this.Name}, Age: {this.Age}, State: {this.State}";
+            //Phone: {this.Phone}
+        }
     }
 }
