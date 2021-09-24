@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System;
 using System.Linq;
+using Serilog;
 
 namespace DL
 {
@@ -19,7 +20,7 @@ namespace DL
             List<Customer> allCustomers = GetAllCustomers();
             allCustomers.Add(customer);
 
-            jsonString = JsonSerializer.Serialize(customer);
+            jsonString = JsonSerializer.Serialize(allCustomers);
             File.WriteAllText(filePath, jsonString);
             
             return customer;

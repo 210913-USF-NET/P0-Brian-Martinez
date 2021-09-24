@@ -53,7 +53,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Models": "1.0.0"
+          "Models": "1.0.0",
+          "Serilog": "2.10.0"
         },
         "compile": {
           "bin/placeholder/DL.dll": {}
@@ -65,6 +66,9 @@
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Serilog": "2.10.0"
+        },
         "compile": {
           "bin/placeholder/Models.dll": {}
         },

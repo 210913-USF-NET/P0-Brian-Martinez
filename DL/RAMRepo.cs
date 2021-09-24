@@ -15,7 +15,10 @@ namespace DL
             {
                 new Customer()
                 {
-
+                    FirstName = "Brian",
+                    LastName = "Martinez",
+                    Age = 22,
+                    Email = "brian@gmail.com"
                 }
             };
 

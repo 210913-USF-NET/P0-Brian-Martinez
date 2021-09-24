@@ -59,13 +59,17 @@
       },
       "DL/1.0.0": {
         "dependencies": {
-          "Models": "1.0.0"
+          "Models": "1.0.0",
+          "Serilog": "2.10.0"
         },
         "runtime": {
           "DL.dll": {}
         }
       },
       "Models/1.0.0": {
+        "dependencies": {
+          "Serilog": "2.10.0"
+        },
         "runtime": {
           "Models.dll": {}
         }
