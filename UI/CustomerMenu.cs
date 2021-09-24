@@ -28,7 +28,7 @@ namespace UI
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        new ShopChooseLocationMenu(new BL(new FileRepo())).Start();
+                        new ShopChooseLocationMenu().Start();
                         break;
                     case "2":
                         Console.WriteLine("View order");

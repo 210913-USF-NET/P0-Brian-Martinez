@@ -18,7 +18,7 @@ namespace UI
 
             Log.Information("Application Starting...");
 
-            new MainMenu(new BL(new FileRepo())).Start();
+            MenuFactory.GetMenu("main").Start();
 
             Log.Information("Application closing...");
 

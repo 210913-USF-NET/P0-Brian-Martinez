@@ -7,13 +7,6 @@ namespace UI
 {
     public class ShopChooseLocationMenu : IMenu
     {
-        private IBL _bl;
-
-        public ShopChooseLocationMenu(IBL bl)
-        {
-            _bl = bl;
-        }
-
         public void Start()
         {
 
@@ -95,6 +88,7 @@ namespace UI
             //     catch (Exception e)
             //     {
             //         Console.WriteLine(e.Message);
+            //         goto quantity;
             //     }
             //     selectedLineItem.Order.Add(itemToAdd);
             //     LineItem updatedLineItem = _bl.UpdatedInventory(selectedLineItem);

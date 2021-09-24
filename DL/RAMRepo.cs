@@ -18,7 +18,6 @@ namespace DL
                     FirstName = "Brian",
                     LastName = "Martinez",
                     Age = 22,
-                    Email = "brian@gmail.com"
                 }
             };
 

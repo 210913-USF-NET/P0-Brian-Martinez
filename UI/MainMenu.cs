@@ -32,7 +32,7 @@ namespace UI
                 {
                     case "1":
                         CreateCustomer();
-                        new CustomerMenu(new BL(new FileRepo())).Start();
+                        MenuFactory.GetMenu("customer").Start();
                         break;
                     case "2":
                         ViewAllCustomers();
@@ -42,7 +42,7 @@ namespace UI
                         exit = true;
                         break;
                     case "brian":
-                        new BrianMenu().Start();
+                        MenuFactory.GetMenu("brian").Start();
                         break;
                     default:
                         Console.WriteLine("Invalid input");
@@ -60,12 +60,8 @@ namespace UI
             string lastname = Console.ReadLine();
             Console.Write("Age: ");
             int age = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Email: ");
-            string email = Console.ReadLine();
-            // Console.WriteLine("Phone:");
-            // string phone = Console.ReadLine();
 
-            Customer newCustomer = new Customer(firstname, lastname, age, email);
+            Customer newCustomer = new Customer(firstname, lastname, age);
             // phone
             _bl.AddCustomer(newCustomer);
             Console.WriteLine(newCustomer.ToString());
