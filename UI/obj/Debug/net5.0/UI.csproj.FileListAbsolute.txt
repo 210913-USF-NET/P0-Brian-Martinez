@@ -40,3 +40,6 @@ C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\obj\Debug\net5.0\UI.dll
 C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\obj\Debug\net5.0\ref\UI.dll
 C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\obj\Debug\net5.0\UI.pdb
 C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\obj\Debug\net5.0\UI.genruntimeconfig.cache
+C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\bin\Debug\net5.0\Serilog.dll
+C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\brian\Documents\Revature\P0-Brian-Martinez\UI\bin\Debug\net5.0\Serilog.Sinks.File.dll

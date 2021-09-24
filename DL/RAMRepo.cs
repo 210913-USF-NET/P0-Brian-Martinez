@@ -15,10 +15,23 @@ namespace DL
             {
                 new Customer()
                 {
-                    FirstName = "Brian",
-                    LastName = "Martinez",
-                    Age = 22,
-                    State = "NY"
+
+                }
+            };
+
+            _orders = new List<Order>()
+            {
+                new Order()
+                {
+
+                }
+            };
+
+            _lineItems = new List<LineItem>()
+            {
+                new LineItem()
+                {
+
                 }
             };
         }
@@ -43,6 +56,31 @@ namespace DL
         public List<Customer> GetAllCustomers()
         {
             return _customers;
+        }
+
+        private static List<Order> _orders;
+
+        public Order AddOrder(Order order)
+        {
+            _orders.Add(order);
+            return order;
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            return _orders;
+        }
+
+        private static List<LineItem> _lineItems;
+
+        public List<LineItem> GetAllLineItems()
+        {
+            return _lineItems;
+        }
+
+        public LineItem UpdateLineItem(LineItem itemToUpdate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

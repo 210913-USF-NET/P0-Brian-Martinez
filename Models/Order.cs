@@ -6,5 +6,10 @@ namespace Models
     {
         public List<LineItem> LineItems {get; set;}
         public decimal Total {get; set;}
+
+        public override string ToString()
+        {
+            return $"{this.LineItems} | TOTAL: ${this.Total}"; 
+        }
     }
 }

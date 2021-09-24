@@ -24,5 +24,24 @@ namespace StoreBL
             return _repo.AddCustomer(customer);
         }
 
+        public List<Order> GetAllOrders()
+        {
+            return _repo.GetAllOrders();
+        }
+
+        public Order AddOrder(Order order)
+        {
+            return _repo.AddOrder(order);
+        }
+
+        public List<LineItem> GetAllLineItems()
+        {
+            return _repo.GetAllLineItems();
+        }
+
+        public LineItem UpdateLineItem(LineItem itemToUpdate)
+        {
+            return _repo.UpdateLineItem(itemToUpdate);
+        }
     }
 }

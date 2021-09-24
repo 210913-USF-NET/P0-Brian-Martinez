@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "TOE+UEpdhXp58glOw/Mft1IaREO8TGGBFeNDYd8SKt9dnFFG8FOnnLQNX5KIC8VoamE6hQ3/aVP5ClUkJ/yExQ==",
+  "dgSpecHash": "1+ZyVBOjtjn7VOQS2wn/qgR5CKCJQQ9lFZIbgniErNOOTMPAzkvX+sLyOTrNPxTv3ExaUDa+c6DntidD1aHVKQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\brian\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
+    "C:\\Users\\brian\\.nuget\\packages\\serilog.sinks.console\\4.0.0\\serilog.sinks.console.4.0.0.nupkg.sha512",
+    "C:\\Users\\brian\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

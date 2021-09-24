@@ -57,7 +57,7 @@ namespace UI
 
         private void PlaceOrder()
         {
-            Console.WriteLine("Please select the product you would like to buy");
+            Console.WriteLine("Please select a product to purchase");
         }
     }
 }
@@ -76,6 +76,33 @@ namespace UI
             // if(parseSuccess && parsedInput >= 1 && parsedInput < allLineItems.Count)
             // {
             //     LineItem selectedLineItem = allLineItems[parsedInput];
+
+            //     LineItem itemToAdd = new LineItem();
+            //     quantity:
+            //     Console.Write("How many?: ");
+            //     int orderQuantity;
+            //     bool success = Int32.TryParse(Console.ReadLine(), out orderQuantity);
+
+            //     if (!success) 
+            //     {
+            //         Console.WriteLine("Invalid input");
+            //         goto quantity;
+            //     }
+            //     try 
+            //     {
+            //         itemToAdd.Quantity = orderQuantity;
+            //     }
+            //     catch (Exception e)
+            //     {
+            //         Console.WriteLine(e.Message);
+            //     }
+            //     selectedLineItem.Order.Add(itemToAdd);
+            //     LineItem updatedLineItem = _bl.UpdatedInventory(selectedLineItem);
+
+            //     foreach (LineItem item in updatedLineItem.Quantity)
+            //     {
+            //         Console.WriteLine(item);
+            //     }
             // }
             // else
             // {
