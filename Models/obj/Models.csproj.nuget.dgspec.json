@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {}
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\obj\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"

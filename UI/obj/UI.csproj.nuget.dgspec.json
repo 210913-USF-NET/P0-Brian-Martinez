@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj": {}
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\UI\\UI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj": {
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\BL\\BL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj",
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\BL\\BL.csproj",
         "projectName": "BL",
-        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\BL\\BL.csproj",
         "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\obj\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\BL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,11 +26,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\DL\\DL.csproj": {
-                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\DL\\DL.csproj"
+              "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\DL\\DL.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\DL\\DL.csproj"
               },
-              "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj"
+              "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj"
               }
             }
           }
@@ -63,14 +63,14 @@
         }
       }
     },
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\DL\\DL.csproj": {
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\DL\\DL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\DL\\DL.csproj",
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\DL\\DL.csproj",
         "projectName": "DL",
-        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\DL\\DL.csproj",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\DL\\DL.csproj",
         "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\DL\\obj\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\DL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -85,8 +85,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj"
+              "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj"
               }
             }
           }
@@ -101,6 +101,22 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[2.10.0, )"
@@ -125,14 +141,14 @@
         }
       }
     },
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\obj\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -183,14 +199,14 @@
         }
       }
     },
-    "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj": {
+    "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\UI\\UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj",
+        "projectUniqueName": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\UI\\UI.csproj",
         "projectName": "UI",
-        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\UI.csproj",
+        "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\UI\\UI.csproj",
         "packagesPath": "C:\\Users\\brian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\UI\\obj\\",
+        "outputPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\UI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brian\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -205,11 +221,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj": {
-                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\BL\\BL.csproj"
+              "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\BL\\BL.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\BL\\BL.csproj"
               },
-              "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-Brian-Martinez\\Models\\Models.csproj"
+              "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\brian\\Documents\\Revature\\P0-SQL\\P0-Brian-Martinez\\Models\\Models.csproj"
               }
             }
           }
@@ -224,6 +240,12 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
             "Serilog.Sinks.Console": {
               "target": "Package",
               "version": "[4.0.0, )"
