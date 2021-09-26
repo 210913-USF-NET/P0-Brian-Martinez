@@ -44,11 +44,28 @@ namespace UI
                     case "brian":
                         MenuFactory.GetMenu("brian").Start();
                         break;
+                    case "p":
+                        CreateProduct();
+                        break;
                     default:
                         Console.WriteLine("Invalid input");
                         break;
                 }
             } while (!exit);
+        }
+
+        private void CreateLineItem()
+        {
+            
+        }
+
+        private void CreateProduct()
+        {
+            string name = "Goose Island 312 Lemonade Shandy";
+            double price = 5.99;
+            string description = "Easy drinking and session-able, 312 Lemonade Shandy is sure to hit the spot.";
+            Product newProduct = new Product(name, price, description);
+            Console.WriteLine(newProduct.ToString());
         }
 
         private void CreateCustomer()
