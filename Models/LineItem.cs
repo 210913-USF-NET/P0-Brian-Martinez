@@ -1,9 +1,19 @@
-using System;
-
 namespace Models
 {
     public class LineItem
     {
+        public LineItem() {}
+
+        public LineItem(Product item) : this()
+        {
+            this.Item = item;
+        }
+
+        public LineItem(Product product, int quantity) : this(product)
+        {
+            this.Quantity = quantity;
+        }
+
         public Product Item {get; set;}
         public int Quantity {get; set;}
 

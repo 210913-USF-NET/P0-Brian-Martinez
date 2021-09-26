@@ -45,7 +45,8 @@ namespace UI
                         MenuFactory.GetMenu("brian").Start();
                         break;
                     case "p":
-                        CreateProduct();
+                        Product testP = CreateProduct();
+                        CreateLineItem(testP);
                         break;
                     default:
                         Console.WriteLine("Invalid input");
@@ -54,18 +55,21 @@ namespace UI
             } while (!exit);
         }
 
-        private void CreateLineItem()
+        private void CreateLineItem(Product product)
         {
-            
+            Console.Write("Quantity: ");
+            int quantity = Convert.ToInt32(Console.ReadLine());
+            LineItem newItem = new LineItem(product, quantity);
+            Console.WriteLine(newItem.ToString());
         }
 
-        private void CreateProduct()
+        public Product CreateProduct()
         {
             string name = "Goose Island 312 Lemonade Shandy";
             double price = 5.99;
             string description = "Easy drinking and session-able, 312 Lemonade Shandy is sure to hit the spot.";
             Product newProduct = new Product(name, price, description);
-            Console.WriteLine(newProduct.ToString());
+            return newProduct;
         }
 
         private void CreateCustomer()
