@@ -26,7 +26,6 @@ namespace Models
         }
 
         public int Id {get; set;}
-
         public string FirstName {get; set;}
         public string LastName {get; set;}
         public int Age {get; set;}
@@ -34,7 +33,7 @@ namespace Models
  
         public override string ToString()
         {
-            return $"NAME: {this.LastName}, {this.FirstName} | AGE: {this.Age}";
+            return $"ID: {this.Id} | NAME: {this.LastName}, {this.FirstName} | AGE: {this.Age}";
         }
 
         public bool Equals(Customer customer)

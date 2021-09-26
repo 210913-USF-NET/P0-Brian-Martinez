@@ -63,8 +63,8 @@ namespace UI
 
             Customer newCustomer = new Customer(firstname, lastname, age);
             // phone
-            _bl.AddCustomer(newCustomer);
-            Console.WriteLine(newCustomer.ToString());
+            Customer addedCustomer = _bl.AddCustomer(newCustomer);
+            Console.WriteLine(addedCustomer.ToString());
         }
 
         private void ViewAllCustomers()
