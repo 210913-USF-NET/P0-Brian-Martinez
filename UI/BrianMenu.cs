@@ -1,9 +1,20 @@
 using System;
+using Models;
+using StoreBL;
+using DL;
+using System.Collections.Generic;
 
 namespace UI
 {
     public class BrianMenu : IMenu
     {
+        private IBL _bl;
+
+        public BrianMenu(IBL bl)
+        {
+            _bl = bl;
+        }
+
         public void Start()
         {
             bool exit = false;
@@ -16,7 +27,8 @@ namespace UI
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        new BrianChooseLocationMenu().Start();
+                    ViewAllStoreFronts();
+                        new BrianLocationMenu().Start();
                         break;
                     case "x":
                         exit = true;
@@ -26,6 +38,31 @@ namespace UI
                         break;
                 }
             } while (!exit);
+        }
+
+        private void ViewAllStoreFronts()
+        {
+            List<StoreFront> allStores = _bl.GetAllStores();
+            if (allStores == null || allStores.Count == 0)
+            {
+                Console.WriteLine("No Existing Locations");
+                return;
+            }
+            for (int i = 0; i < allStores.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {allStores[i]}");
+            }
+            Console.Write("Please choose a location: ");
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            if (parseSuccess && parsedInput >= 0 && parsedInput < allStores.Count)
+            {
+                StoreFront selectedStore = allStores[parsedInput];
+                Console.WriteLine($"Welcome to {selectedStore.Name}!");
+            }
         }
     }
 }

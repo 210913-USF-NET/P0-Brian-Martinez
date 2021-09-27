@@ -18,7 +18,8 @@ namespace DL
 
         public Models.Customer AddCustomer(Models.Customer customer)
         {
-            Entity.Customer customerToAdd = new Entity.Customer() {
+            Entity.Customer customerToAdd = new Entity.Customer()
+            {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Age = customer.Age
@@ -40,11 +41,60 @@ namespace DL
         public List<Models.Customer> GetAllCustomers()
         {
             return _context.Customers.Select(
-                customer => new Models.Customer() {
+                customer => new Models.Customer()
+                {
                     Id = customer.Id,
                     FirstName = customer.FirstName,
                     LastName = customer.LastName,
                     Age = customer.Age
+                }
+            ).ToList();
+        }
+
+        // public Models.Customer UpdateCustomer(Models.Customer customerToUpdate)
+        // {
+        //     // throw new NotImplementedException();
+        //     Entity.Customer custToUpdate = new Entity.Customer() {
+        //         Id = customerToUpdate.Id,
+        //         FirstName = customerToUpdate.FirstName,
+        //         LastName = customerToUpdate.LastName,
+        //         Age = customerToUpdate.Age
+        //     };
+
+        //     custToUpdate = _context.Customer.Update(custToUpdate).Entity;
+        //     _context.SaveChanges();
+        //     _context.ChangeTracker.Clear();
+
+        //     return new Models.Customer() {
+        //         Id = custToUpdate.Id,
+        //         FirstName = custToUpdate.FirstName,
+        //         LastName = custToUpdate.LastName,
+        //         Age = custToUpdate.Age
+        //     };
+        // }
+
+        public List<Customer> SearchCustomer(string queryStr)
+        {
+            return _context.Customers.Where(
+                customer => customer.LastName.Contains(queryStr)
+            ).Select(
+                c => new Models.Customer()
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Age = c.Age
+                }
+            ).OrderBy(c => c.FirstName).ToList();
+        }
+
+        public List<Models.StoreFront> GetAllStores()
+        {
+            return _context.StoreFronts.Select(
+                store => new Models.StoreFront()
+                {
+                    Id = store.Id,
+                    Name = store.Name
                 }
             ).ToList();
         }
@@ -59,14 +109,47 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public List<Models.LineItem> GetAllLineItems()
+        public List<Models.Product> GetProducts()
         {
-            throw new NotImplementedException();
+            return _context.Products.Select(
+                product => new Models.Product()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Description = product.Description
+                }
+            ).ToList();
         }
 
-        public Models.LineItem UpdateLineItem(Models.LineItem itemToUpdate)
+        public List<Models.Inventory> GetInventory()
+        {
+            return _context.Inventories.Select(
+                item => new Models.Inventory()
+                {
+                    Id = item.Id,
+                    Quantity = item.Quantity,
+                    // ProductId = item.ProductId
+                }
+            ).ToList();
+        }
+
+        public Models.Inventory UpdateInventory(Models.Inventory productToUpdate)
         {
             throw new NotImplementedException();
+            // Entity.Inventory pToUpdate = new Entity.Inventory() {
+            //     Id = productToUpdate.Id,
+
+            // };
+
+            // pToUpdate = _context.Inventory.Update(pToUpdate).Entity;
+            // _context.SaveChanges();
+            // _context.ChangeTracker.Clear();
+
+            // return new Models.Inventory() {
+            //     Id = pToUpdate.Id,
+
+            // };
         }
     }
 }

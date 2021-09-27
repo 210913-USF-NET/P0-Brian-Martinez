@@ -8,11 +8,16 @@ namespace StoreBL
     {
         List<Customer> GetAllCustomers();
         Customer AddCustomer(Customer customer);
+        // Customer UpdateCustomer(Order customerToUpdate);
+        List<Customer> SearchCustomer(string queryStr);
+
+        List<StoreFront> GetAllStores();
 
         List<Order> GetAllOrders();
         Order AddOrder(Order order);
 
-        List<LineItem> GetAllLineItems();
-        LineItem UpdateLineItem(LineItem itemToUpdate);
+        List<Product> GetProducts();
+        List<Inventory> GetInventory();
+        Inventory UpdateInventory(Inventory productToUpdate);
     }
 }

@@ -22,7 +22,7 @@ namespace UI
                 case "customer":
                     return new CustomerMenu(new BL(new DBRepo(context)));
                 case "brian":
-                    return new BrianMenu();
+                    return new BrianMenu(new BL(new DBRepo(context)));
                 default:
                     return null;
             }

@@ -24,6 +24,21 @@ namespace StoreBL
             return _repo.AddCustomer(customer);
         }
 
+        // public Customer UpdateCustomer(Customer customerToUpdate)
+        // {
+        //     return _repo.UpdateCustomer(customerToUpdate);
+        // }
+
+        public List<Customer> SearchCustomer(string queryStr)
+        {
+            return _repo.SearchCustomer(queryStr);
+        }
+
+        public List<StoreFront> GetAllStores()
+        {
+            return _repo.GetAllStores();
+        }
+
         public List<Order> GetAllOrders()
         {
             return _repo.GetAllOrders();
@@ -34,14 +49,18 @@ namespace StoreBL
             return _repo.AddOrder(order);
         }
 
-        public List<LineItem> GetAllLineItems()
+        public List<Product> GetProducts()
         {
-            return _repo.GetAllLineItems();
+            return _repo.GetProducts();
+        }
+        public List<Inventory> GetInventory()
+        {
+            return _repo.GetInventory();
         }
 
-        public LineItem UpdateLineItem(LineItem itemToUpdate)
+        public Inventory UpdateInventory(Inventory productToUpdate)
         {
-            return _repo.UpdateLineItem(itemToUpdate);
+            return _repo.UpdateInventory(productToUpdate);
         }
     }
 }

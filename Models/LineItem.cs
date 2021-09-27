@@ -9,7 +9,7 @@ namespace Models
             this.Item = item;
         }
 
-        public LineItem(Product product, int quantity) : this(product)
+        public LineItem(Product item, int quantity) : this(item)
         {
             this.Quantity = quantity;
         }

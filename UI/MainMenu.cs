@@ -16,7 +16,7 @@ namespace UI
         }
 
         public void Start()
-        { 
+        {
             Console.WriteLine("Welcome to The Beer Garden's console app!");
             bool exit = false;
             string input = "";
@@ -35,7 +35,8 @@ namespace UI
                         MenuFactory.GetMenu("customer").Start();
                         break;
                     case "2":
-                        ViewAllCustomers();
+                        SearchLastName();
+                        MenuFactory.GetMenu("customer").Start();
                         break;
                     case "x":
                         Console.WriteLine("Bye!");
@@ -44,32 +45,11 @@ namespace UI
                     case "brian":
                         MenuFactory.GetMenu("brian").Start();
                         break;
-                    case "p":
-                        Product testP = CreateProduct();
-                        CreateLineItem(testP);
-                        break;
                     default:
                         Console.WriteLine("Invalid input");
                         break;
                 }
             } while (!exit);
-        }
-
-        private void CreateLineItem(Product product)
-        {
-            Console.Write("Quantity: ");
-            int quantity = Convert.ToInt32(Console.ReadLine());
-            LineItem newItem = new LineItem(product, quantity);
-            Console.WriteLine(newItem.ToString());
-        }
-
-        public Product CreateProduct()
-        {
-            string name = "Goose Island 312 Lemonade Shandy";
-            double price = 5.99;
-            string description = "Easy drinking and session-able, 312 Lemonade Shandy is sure to hit the spot.";
-            Product newProduct = new Product(name, price, description);
-            return newProduct;
         }
 
         private void CreateCustomer()
@@ -101,6 +81,31 @@ namespace UI
                 {
                     Console.WriteLine(customer.ToString());
                 }
+            }
+        }
+
+        private void SearchLastName()
+        {
+            Console.Write("Enter last name: ");
+            List<Customer> searchResult = _bl.SearchCustomer(Console.ReadLine());
+            if (searchResult == null || searchResult.Count == 0)
+            {
+                Console.WriteLine("No Existing Members with that name");
+                return;
+            }
+            for (int i = 0; i < searchResult.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {searchResult[i]}");
+            }
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            if (parseSuccess && parsedInput >= 0 && parsedInput < searchResult.Count)
+            {
+                Customer selectedCustomer = searchResult[parsedInput];
+                Console.WriteLine($"Welcome back {selectedCustomer.FirstName}!");
             }
         }
     }

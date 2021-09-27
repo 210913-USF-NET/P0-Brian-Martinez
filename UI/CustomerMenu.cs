@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace UI
 {
-    public class CustomerMenu :IMenu
+    public class CustomerMenu : IMenu
     {
         private IBL _bl;
 
@@ -22,19 +22,20 @@ namespace UI
             {
                 Console.WriteLine("[1] Shop");
                 Console.WriteLine("[2] View Order(s)");
-                Console.WriteLine("[3] View Locations");
+                Console.WriteLine("[3] View Products");
                 Console.WriteLine("[x] Back to Main Menu");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        new ShopChooseLocationMenu().Start();
+                        ViewAllStoreFronts();
+                        new ShopMenu(_bl).Start();
                         break;
                     case "2":
                         Console.WriteLine("View order");
                         break;
                     case "3":
-                        new ChooseLocationMenu().Start();
+                        ViewProducts();
                         break;
                     case "x":
                         exit = true;
@@ -44,6 +45,31 @@ namespace UI
                         break;
                 }
             } while (!exit);
+        }
+
+        private void ViewAllStoreFronts()
+        {
+            List<StoreFront> allStores = _bl.GetAllStores();
+            if (allStores == null || allStores.Count == 0)
+            {
+                Console.WriteLine("No Existing Locations");
+                return;
+            }
+            for (int i = 0; i < allStores.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {allStores[i]}");
+            }
+            Console.Write("Please choose a location: ");
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            if (parseSuccess && parsedInput >= 0 && parsedInput < allStores.Count)
+            {
+                StoreFront selectedStore = allStores[parsedInput];
+                Console.WriteLine($"Welcome to {selectedStore.Name}!");
+            }
         }
 
         public void ViewOrders()
@@ -57,6 +83,17 @@ namespace UI
             for (int i = 0; i < allOrders.Count; i++)
             {
                 Console.WriteLine($"[{i}] {allOrders[i]}");
+            }
+        }
+
+        public void ViewProducts()
+        {
+            List<Product> allProducts = _bl.GetProducts();
+
+            foreach (Product product in allProducts)
+            {
+                Console.WriteLine(product);
+                Console.WriteLine("");
             }
         }
     }
