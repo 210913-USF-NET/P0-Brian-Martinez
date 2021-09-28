@@ -24,11 +24,6 @@ namespace StoreBL
             return _repo.AddCustomer(customer);
         }
 
-        // public Customer UpdateCustomer(Customer customerToUpdate)
-        // {
-        //     return _repo.UpdateCustomer(customerToUpdate);
-        // }
-
         public List<Customer> SearchCustomer(string queryStr)
         {
             return _repo.SearchCustomer(queryStr);
@@ -38,29 +33,54 @@ namespace StoreBL
         {
             return _repo.GetAllStores();
         }
-
-        public List<Order> GetAllOrders()
+        public StoreFront AddStore(StoreFront store)
         {
-            return _repo.GetAllOrders();
+            return _repo.AddStore(store);
         }
 
-        public Order AddOrder(Order order)
+        public Order CreateCart(int customerId)
         {
-            return _repo.AddOrder(order);
+            return _repo.CreateCart(customerId);
         }
 
         public List<Product> GetProducts()
         {
             return _repo.GetProducts();
         }
+
+        public Product GetProduct(int Id)
+        {
+            return _repo.GetProduct(Id);
+        }
+
+        public StoreFront GetStore(int Id)
+        {
+            return _repo.GetStore(Id);
+        }
+
         public List<Inventory> GetInventory()
         {
             return _repo.GetInventory();
         }
 
-        public Inventory UpdateInventory(Inventory productToUpdate)
+        public Order PlaceOrder(Order order, StoreFront store)
         {
-            return _repo.UpdateInventory(productToUpdate);
+            return _repo.PlaceOrder(order, store);
+        }
+
+        public int UpdateInventory(StoreFront store, LineItem item)
+        {
+            return _repo.UpdateInventory(store, item);
+        }
+
+        public List<LineItem> GetLineItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public StoreFront AddCustomer(StoreFront newStore)
+        {
+            throw new NotImplementedException();
         }
     }
 }

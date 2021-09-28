@@ -28,8 +28,7 @@ namespace UI
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        ViewAllStoreFronts();
-                        new ShopMenu(_bl).Start();
+                        MenuFactory.GetMenu("shop").Start();
                         break;
                     case "2":
                         Console.WriteLine("View order");
@@ -45,45 +44,6 @@ namespace UI
                         break;
                 }
             } while (!exit);
-        }
-
-        private void ViewAllStoreFronts()
-        {
-            List<StoreFront> allStores = _bl.GetAllStores();
-            if (allStores == null || allStores.Count == 0)
-            {
-                Console.WriteLine("No Existing Locations");
-                return;
-            }
-            for (int i = 0; i < allStores.Count; i++)
-            {
-                Console.WriteLine($"[{i}] {allStores[i]}");
-            }
-            Console.Write("Please choose a location: ");
-            string input = Console.ReadLine();
-            int parsedInput;
-
-            bool parseSuccess = Int32.TryParse(input, out parsedInput);
-
-            if (parseSuccess && parsedInput >= 0 && parsedInput < allStores.Count)
-            {
-                StoreFront selectedStore = allStores[parsedInput];
-                Console.WriteLine($"Welcome to {selectedStore.Name}!");
-            }
-        }
-
-        public void ViewOrders()
-        {
-            List<Order> allOrders = _bl.GetAllOrders();
-            if (allOrders == null || allOrders.Count == 0)
-            {
-                Console.WriteLine("No Orders");
-                return;
-            }
-            for (int i = 0; i < allOrders.Count; i++)
-            {
-                Console.WriteLine($"[{i}] {allOrders[i]}");
-            }
         }
 
         public void ViewProducts()

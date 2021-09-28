@@ -54,6 +54,7 @@ namespace UI
 
         private void CreateCustomer()
         {
+            Customer user = null;
             Console.WriteLine("Creating new customer");
             Console.Write("First Name: ");
             string firstname = Console.ReadLine();
@@ -63,8 +64,8 @@ namespace UI
             int age = Convert.ToInt32(Console.ReadLine());
 
             Customer newCustomer = new Customer(firstname, lastname, age);
-            // phone
             Customer addedCustomer = _bl.AddCustomer(newCustomer);
+            user = addedCustomer;
             Console.WriteLine(addedCustomer.ToString());
         }
 
@@ -86,6 +87,7 @@ namespace UI
 
         private void SearchLastName()
         {
+            Customer user = null;
             Console.Write("Enter last name: ");
             List<Customer> searchResult = _bl.SearchCustomer(Console.ReadLine());
             if (searchResult == null || searchResult.Count == 0)
@@ -105,6 +107,7 @@ namespace UI
             if (parseSuccess && parsedInput >= 0 && parsedInput < searchResult.Count)
             {
                 Customer selectedCustomer = searchResult[parsedInput];
+                MenuFactory.currentCustomer = user;
                 Console.WriteLine($"Welcome back {selectedCustomer.FirstName}!");
             }
         }

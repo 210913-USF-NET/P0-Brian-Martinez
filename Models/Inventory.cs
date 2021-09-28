@@ -1,14 +1,24 @@
+using System.Collections.Generic;
+
 namespace Models
 {
     public class Inventory
     {
-        public int Id { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
-
-        public override string ToString()
+        public Inventory() { }
+        public Inventory(int storeId, int productId, int quantity)
         {
-            return $"\n{this.Quantity} in stock";
+            this.StoreId = storeId;
+            this.ProductId = productId;
+            this.Quantity = quantity;
         }
+
+        public int Id { get; set; }
+        public int? StoreId { get; set; }
+        public int? ProductId { get; set; }
+        public int? Quantity { get; set; }
+        public List<Product> Products { get; set; }
+
+        public virtual Product Product { get; set; }
+        public virtual StoreFront Store { get; set; }
     }
 }

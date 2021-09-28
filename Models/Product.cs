@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Models
 {
     public class Product
@@ -23,6 +25,7 @@ namespace Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
+        public List<Inventory> Inventory { get; set; }
 
         public override string ToString()
         {

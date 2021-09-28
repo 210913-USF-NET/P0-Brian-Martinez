@@ -7,7 +7,14 @@ namespace DL.Entities
 {
     public partial class StoreFront
     {
+        public StoreFront()
+        {
+            Inventories = new HashSet<Inventory>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<Inventory> Inventories { get; set; }
     }
 }

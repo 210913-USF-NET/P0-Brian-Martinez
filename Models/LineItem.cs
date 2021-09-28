@@ -2,24 +2,23 @@ namespace Models
 {
     public class LineItem
     {
-        public LineItem() {}
+        public LineItem() { }
 
-        public LineItem(Product item) : this()
+        public LineItem(int StoreId, int ProductId, int Quantity, int OrderId)
         {
-            this.Item = item;
+            this.StoreId = StoreId;
+            this.ProductId = ProductId;
+            this.Quantity = Quantity;
+            this.OrderId = OrderId;
         }
 
-        public LineItem(Product item, int quantity) : this(item)
-        {
-            this.Quantity = quantity;
-        }
+        public int? StoreId { get; set; }
+        public int ProductId { get; set; }
+        public int? Quantity { get; set; }
+        public int OrderId { get; set; }
 
-        public Product Item {get; set;}
-        public int Quantity {get; set;}
-
-        public override string ToString()
-        {
-            return $"{this.Quantity} {this.Item}(s) added to cart";
-        }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual StoreFront Store { get; set; }
     }
 }

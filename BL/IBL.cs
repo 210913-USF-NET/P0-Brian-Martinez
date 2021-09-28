@@ -12,12 +12,18 @@ namespace StoreBL
         List<Customer> SearchCustomer(string queryStr);
 
         List<StoreFront> GetAllStores();
+        StoreFront AddStore(StoreFront store);
 
-        List<Order> GetAllOrders();
-        Order AddOrder(Order order);
+        Order CreateCart(int customerId);
+        Order PlaceOrder(Order order, StoreFront store);
 
         List<Product> GetProducts();
+        List<LineItem> GetLineItem();
+
+        Product GetProduct(int Id);
+        StoreFront GetStore(int Id);
         List<Inventory> GetInventory();
-        Inventory UpdateInventory(Inventory productToUpdate);
+        int UpdateInventory(StoreFront store, LineItem item);
+        StoreFront AddCustomer(StoreFront newStore);
     }
 }

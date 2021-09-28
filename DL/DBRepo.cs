@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Models;
 using Entity = DL.Entities;
@@ -51,28 +52,6 @@ namespace DL
             ).ToList();
         }
 
-        // public Models.Customer UpdateCustomer(Models.Customer customerToUpdate)
-        // {
-        //     // throw new NotImplementedException();
-        //     Entity.Customer custToUpdate = new Entity.Customer() {
-        //         Id = customerToUpdate.Id,
-        //         FirstName = customerToUpdate.FirstName,
-        //         LastName = customerToUpdate.LastName,
-        //         Age = customerToUpdate.Age
-        //     };
-
-        //     custToUpdate = _context.Customer.Update(custToUpdate).Entity;
-        //     _context.SaveChanges();
-        //     _context.ChangeTracker.Clear();
-
-        //     return new Models.Customer() {
-        //         Id = custToUpdate.Id,
-        //         FirstName = custToUpdate.FirstName,
-        //         LastName = custToUpdate.LastName,
-        //         Age = custToUpdate.Age
-        //     };
-        // }
-
         public List<Customer> SearchCustomer(string queryStr)
         {
             return _context.Customers.Where(
@@ -99,9 +78,60 @@ namespace DL
             ).ToList();
         }
 
-        public Models.Order AddOrder(Models.Order order)
+        public Models.StoreFront AddStore(Models.StoreFront store)
         {
-            throw new NotImplementedException();
+            Entity.StoreFront storeToAdd = new Entity.StoreFront()
+            {
+                Name = store.Name
+            };
+
+            store = _context.Add(store).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Models.StoreFront()
+            {
+                Id = store.Id,
+                Name = store.Name,
+            };
+        }
+
+        public Order CreateCart(int CustomerId)
+        {
+            // Entity.Order cart = new Entity.Order() { };
+            // cart.CustomerId = CustomerId;
+            Entity.Order cart = new Entity.Order()
+            {
+                CustomerId = CustomerId
+            };
+            cart = _context.Add(cart).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Models.Order()
+            {
+                Id = cart.Id,
+                CustomerId = (int)cart.CustomerId
+            };
+        }
+
+        public Models.Order PlaceOrder(Models.Order order, Models.StoreFront store)
+        {
+            foreach (Models.LineItem item in order.LineItems)
+            {
+                Entity.LineItem itemToAdd = new Entity.LineItem()
+                {
+                    StoreId = store.Id,
+                    ProductId = item.ProductId,
+                    Quantity = (int)item.Quantity,
+                    OrderId = order.Id
+                };
+                itemToAdd = _context.Add(itemToAdd).Entity;
+                _context.SaveChanges();
+                _context.ChangeTracker.Clear();
+            }
+
+            return order;
         }
 
         public List<Models.Order> GetAllOrders()
@@ -122,34 +152,82 @@ namespace DL
             ).ToList();
         }
 
+        public Models.Product GetProduct(int Id)
+        {
+            Entity.Product getProduct = _context.Products.FirstOrDefault(p => p.Id == Id);
+            return new Models.Product()
+            {
+                Id = getProduct.Id,
+                Name = getProduct.Name,
+                Price = getProduct.Price,
+                Description = getProduct.Description,
+                Inventory = getProduct.Inventories.Select(p => new Models.Inventory()
+                {
+                    Id = p.Id,
+                    ProductId = p.ProductId,
+                    Quantity = p.Quantity
+                }).ToList()
+            };
+        }
+
+        public Models.StoreFront GetStore(int Id)
+        {
+            Entity.StoreFront getStore = _context.StoreFronts.Include(s => s.Inventories).FirstOrDefault(s => s.Id == Id);
+
+            return new Models.StoreFront()
+            {
+                Id = getStore.Id,
+                Name = getStore.Name,
+                Inventory = getStore.Inventories.Select(s => new Models.Inventory()
+                {
+                    Id = s.Id,
+                    ProductId = s.ProductId,
+                    Quantity = s.Quantity
+                }).ToList()
+            };
+        }
+
         public List<Models.Inventory> GetInventory()
         {
             return _context.Inventories.Select(
-                item => new Models.Inventory()
+                Inventory => new Models.Inventory()
                 {
-                    Id = item.Id,
-                    Quantity = item.Quantity,
-                    // ProductId = item.ProductId
+                    Id = Inventory.Id,
+                    StoreId = Inventory.StoreId,
+                    ProductId = Inventory.ProductId,
+                    Quantity = Inventory.Quantity
                 }
             ).ToList();
         }
 
-        public Models.Inventory UpdateInventory(Models.Inventory productToUpdate)
+        public int UpdateInventory(Models.StoreFront store, Models.LineItem item)
         {
-            throw new NotImplementedException();
-            // Entity.Inventory pToUpdate = new Entity.Inventory() {
-            //     Id = productToUpdate.Id,
+            bool found = false;
+            int i = 0;
+            while (found)
+            {
+                if (store.Inventory[i].ProductId == item.ProductId && store.Inventory[i].StoreId == store.Id)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i = i + 1;
+                }
+            }
+            Entity.Inventory updateInv = new Entity.Inventory()
+            {
+                Id = store.Inventory[i].Id,
+                StoreId = store.Id,
+                ProductId = item.ProductId,
+                Quantity = (int)(store.Inventory[i].Quantity - item.Quantity)
+            };
 
-            // };
+            updateInv = _context.Inventories.Update(updateInv).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
 
-            // pToUpdate = _context.Inventory.Update(pToUpdate).Entity;
-            // _context.SaveChanges();
-            // _context.ChangeTracker.Clear();
-
-            // return new Models.Inventory() {
-            //     Id = pToUpdate.Id,
-
-            // };
+            return Convert.ToInt32(updateInv.Quantity);
         }
     }
 }

@@ -4,24 +4,22 @@ namespace Models
 {
     public class Order
     {
-        // public Order() {}
+        public Order() { }
+        public Order(int OrderId, int CustomerId, List<LineItem> lineItems)
+        {
+            this.Id = OrderId;
+            this.CustomerId = CustomerId;
+            this.LineItems = lineItems;
+        }
 
-        // public Order(LineItem lineitems) : this()
-        // {
-        //     this.LineItems = lineitems;
-        // }
-
-        // public Order(LineItem lineitems, double total) : this(lineitems)
-        // {
-        //     this.Total = total;
-        // }
-
-        public List<LineItem> LineItems {get; set;}
-        public double Total {get; set;}
+        public int Id { get; set; }
+        public int? CustomerId { get; set; }
+        public LineItem Item { get; set; }
+        public List<LineItem> LineItems { get; set; }
 
         public override string ToString()
         {
-            return $"{this.LineItems} | TOTAL: ${this.Total}"; 
+            return $"{this.LineItems}";
         }
     }
 }

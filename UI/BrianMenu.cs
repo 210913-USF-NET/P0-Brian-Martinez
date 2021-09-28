@@ -22,13 +22,17 @@ namespace UI
             {
                 Console.WriteLine("Welcome Master!");
                 Console.WriteLine("[1] Manage Locations");
+                Console.WriteLine("[2] Add Location");
                 Console.WriteLine("[x] Back to Main Menu");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
-                    ViewAllStoreFronts();
+                        ViewAllStoreFronts();
                         new BrianLocationMenu().Start();
+                        break;
+                    case "2":
+                        CreateStoreFront();
                         break;
                     case "x":
                         exit = true;
@@ -63,6 +67,17 @@ namespace UI
                 StoreFront selectedStore = allStores[parsedInput];
                 Console.WriteLine($"Welcome to {selectedStore.Name}!");
             }
+        }
+
+        private void CreateStoreFront()
+        {
+            Console.WriteLine("Creating new storefront");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+
+            StoreFront newStore = new StoreFront(name);
+            StoreFront addedStore = _bl.AddCustomer(newStore);
+            Console.WriteLine(addedStore.ToString());
         }
     }
 }

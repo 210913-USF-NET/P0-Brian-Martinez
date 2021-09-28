@@ -20,6 +20,7 @@ namespace DL.Entities
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<LineItem> LineItems { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<StoreFront> StoreFronts { get; set; }
 
@@ -45,15 +46,42 @@ namespace DL.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Inventories)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Inventory__Produ__02FC7413");
+                    .HasConstraintName("FK__Inventory__Produ__10566F31");
+
+                entity.HasOne(d => d.Store)
+                    .WithMany(p => p.Inventories)
+                    .HasForeignKey(d => d.StoreId)
+                    .HasConstraintName("FK__Inventory__Store__0F624AF8");
             });
 
             modelBuilder.Entity<LineItem>(entity =>
             {
+                entity.HasNoKey();
+
+                entity.HasOne(d => d.Order)
+                    .WithMany()
+                    .HasForeignKey(d => d.OrderId)
+                    .HasConstraintName("FK__LineItems__Order__18EBB532");
+
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.LineItems)
+                    .WithMany()
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__LineItems__Produ__00200768");
+                    .HasConstraintName("FK__LineItems__Produ__17F790F9");
+
+                entity.HasOne(d => d.Store)
+                    .WithMany()
+                    .HasForeignKey(d => d.StoreId)
+                    .HasConstraintName("FK__LineItems__Store__19DFD96B");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 0)");
+
+                entity.HasOne(d => d.Customer)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.CustomerId)
+                    .HasConstraintName("FK__Orders__Customer__160F4887");
             });
 
             modelBuilder.Entity<Product>(entity =>

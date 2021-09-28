@@ -10,12 +10,17 @@ namespace DL
         List<Customer> SearchCustomer(string queryStr);
 
         List<StoreFront> GetAllStores();
+        StoreFront AddStore(StoreFront store);
 
-        Order AddOrder(Order order);
-        List<Order> GetAllOrders();
-
+        Order CreateCart(int customerId);
         List<Product> GetProducts();
+
+        Product GetProduct(int Id);
+        StoreFront GetStore(int Id);
         List<Inventory> GetInventory();
-        Inventory UpdateInventory(Inventory productToUpdate);
+
+        Order PlaceOrder(Order order, StoreFront store);
+
+        int UpdateInventory(StoreFront store, LineItem item);
     }
 }
