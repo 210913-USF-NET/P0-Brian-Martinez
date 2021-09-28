@@ -1,8 +1,8 @@
 using System;
 using Models;
 using StoreBL;
-using DL;
 using System.Collections.Generic;
+using Serilog;
 
 namespace UI
 {
@@ -23,16 +23,20 @@ namespace UI
                 Console.WriteLine("Welcome Master!");
                 Console.WriteLine("[1] Manage Locations");
                 Console.WriteLine("[2] Add Location");
+                Console.WriteLine("[3] Add Product");
                 Console.WriteLine("[x] Back to Main Menu");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
                         ViewAllStoreFronts();
-                        new BrianLocationMenu().Start();
+                        MenuFactory.GetMenu("brianManage").Start();
                         break;
                     case "2":
                         CreateStoreFront();
+                        break;
+                    case "3":
+                        CreateProduct();
                         break;
                     case "x":
                         exit = true;
@@ -71,13 +75,28 @@ namespace UI
 
         private void CreateStoreFront()
         {
-            Console.WriteLine("Creating new storefront");
+            Log.Information("Creating new storefront");
             Console.Write("Name: ");
             string name = Console.ReadLine();
 
             StoreFront newStore = new StoreFront(name);
-            StoreFront addedStore = _bl.AddCustomer(newStore);
-            Console.WriteLine(addedStore.ToString());
+            StoreFront addedStore = _bl.AddStore(newStore);
+            Log.Information($"Store: {addedStore.Name} successfully added");
+        }
+
+        private void CreateProduct()
+        {
+            Log.Information("Creating new product");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Price: ");
+            int price = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Description: ");
+            string description = Console.ReadLine();
+
+            Product newProduct = new Product(name, price, description);
+            Product addedProduct = _bl.AddProduct(newProduct);
+            Log.Information($"Product: {addedProduct.Name} successfully added");
         }
     }
 }

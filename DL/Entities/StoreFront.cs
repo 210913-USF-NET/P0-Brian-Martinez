@@ -10,11 +10,13 @@ namespace DL.Entities
         public StoreFront()
         {
             Inventories = new HashSet<Inventory>();
+            LineItems = new HashSet<LineItem>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Inventory> Inventories { get; set; }
+        public virtual ICollection<LineItem> LineItems { get; set; }
     }
 }

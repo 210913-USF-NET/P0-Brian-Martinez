@@ -18,6 +18,7 @@ namespace StoreBL
         Order PlaceOrder(Order order, StoreFront store);
 
         List<Product> GetProducts();
+        Product AddProduct(Product product);
         List<LineItem> GetLineItem();
 
         Product GetProduct(int Id);

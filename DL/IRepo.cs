@@ -14,7 +14,7 @@ namespace DL
 
         Order CreateCart(int customerId);
         List<Product> GetProducts();
-
+        Product AddProduct(Product product);
         Product GetProduct(int Id);
         StoreFront GetStore(int Id);
         List<Inventory> GetInventory();

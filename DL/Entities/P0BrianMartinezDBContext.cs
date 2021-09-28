@@ -56,28 +56,24 @@ namespace DL.Entities
 
             modelBuilder.Entity<LineItem>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__LineItems__Order__18EBB532");
+                    .HasConstraintName("FK__LineItems__Order__2180FB33");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__LineItems__Produ__17F790F9");
+                    .HasConstraintName("FK__LineItems__Produ__22751F6C");
 
                 entity.HasOne(d => d.Store)
-                    .WithMany()
+                    .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.StoreId)
-                    .HasConstraintName("FK__LineItems__Store__19DFD96B");
+                    .HasConstraintName("FK__LineItems__Store__236943A5");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.Total).HasColumnType("decimal(18, 0)");
-
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)

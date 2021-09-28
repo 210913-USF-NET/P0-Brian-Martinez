@@ -12,7 +12,6 @@ namespace Models
 
         public int Id { get; set; }
         public string Name { get; set; }
-
         public List<Inventory> Inventory { get; set; }
 
         public override string ToString()

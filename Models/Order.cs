@@ -14,7 +14,7 @@ namespace Models
 
         public int Id { get; set; }
         public int? CustomerId { get; set; }
-        public LineItem Item { get; set; }
+        public LineItem LineItem { get; set; }
         public List<LineItem> LineItems { get; set; }
 
         public override string ToString()

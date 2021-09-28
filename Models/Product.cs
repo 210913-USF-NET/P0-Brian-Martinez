@@ -11,19 +11,19 @@ namespace Models
             this.Name = name;
         }
 
-        public Product(string name, decimal price) : this(name)
+        public Product(string name, int price) : this(name)
         {
             this.Price = price;
         }
 
-        public Product(string name, decimal price, string description) : this(name, price)
+        public Product(string name, int price, string description) : this(name, price)
         {
             this.Description = description;
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public string Description { get; set; }
         public List<Inventory> Inventory { get; set; }
 

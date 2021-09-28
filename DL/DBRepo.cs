@@ -85,18 +85,40 @@ namespace DL
                 Name = store.Name
             };
 
-            store = _context.Add(store).Entity;
+            storeToAdd = _context.Add(storeToAdd).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
             return new Models.StoreFront()
             {
-                Id = store.Id,
-                Name = store.Name,
+                Id = storeToAdd.Id,
+                Name = storeToAdd.Name,
             };
         }
 
-        public Order CreateCart(int CustomerId)
+        public Models.Product AddProduct(Models.Product product)
+        {
+            Entity.Product productToAdd = new Entity.Product()
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description
+            };
+
+            productToAdd = _context.Add(productToAdd).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Models.Product()
+            {
+                Id = productToAdd.Id,
+                Name = productToAdd.Name,
+                Price = (int)productToAdd.Price,
+                Description = productToAdd.Description
+            };
+        }
+
+        public Models.Order CreateCart(int CustomerId)
         {
             // Entity.Order cart = new Entity.Order() { };
             // cart.CustomerId = CustomerId;
@@ -146,7 +168,7 @@ namespace DL
                 {
                     Id = product.Id,
                     Name = product.Name,
-                    Price = product.Price,
+                    Price = (int)product.Price,
                     Description = product.Description
                 }
             ).ToList();
@@ -159,7 +181,7 @@ namespace DL
             {
                 Id = getProduct.Id,
                 Name = getProduct.Name,
-                Price = getProduct.Price,
+                Price = (int)getProduct.Price,
                 Description = getProduct.Description,
                 Inventory = getProduct.Inventories.Select(p => new Models.Inventory()
                 {
@@ -170,9 +192,9 @@ namespace DL
             };
         }
 
-        public Models.StoreFront GetStore(int Id)
+        public Models.StoreFront GetStore(int ID)
         {
-            Entity.StoreFront getStore = _context.StoreFronts.Include(s => s.Inventories).FirstOrDefault(s => s.Id == Id);
+            Entity.StoreFront getStore = _context.StoreFronts.Include(s => s.Inventories).FirstOrDefault(s => s.Id == ID);
 
             return new Models.StoreFront()
             {
@@ -181,6 +203,7 @@ namespace DL
                 Inventory = getStore.Inventories.Select(s => new Models.Inventory()
                 {
                     Id = s.Id,
+                    StoreId = s.StoreId,
                     ProductId = s.ProductId,
                     Quantity = s.Quantity
                 }).ToList()
@@ -202,32 +225,23 @@ namespace DL
 
         public int UpdateInventory(Models.StoreFront store, Models.LineItem item)
         {
-            bool found = false;
+            bool itemFound = false;
             int i = 0;
-            while (found)
-            {
-                if (store.Inventory[i].ProductId == item.ProductId && store.Inventory[i].StoreId == store.Id)
-                {
-                    found = true;
-                }
-                else
-                {
-                    i = i + 1;
-                }
-            }
+            Models.Inventory test = store.Inventory.FirstOrDefault(i => i.ProductId == item.ProductId && store.Id == i.StoreId);
             Entity.Inventory updateInv = new Entity.Inventory()
             {
-                Id = store.Inventory[i].Id,
+                Id = test.Id,
                 StoreId = store.Id,
                 ProductId = item.ProductId,
-                Quantity = (int)(store.Inventory[i].Quantity - item.Quantity)
+                Quantity = (int)(test.Quantity - item.Quantity)
             };
 
             updateInv = _context.Inventories.Update(updateInv).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
+            int newQuantity = Convert.ToInt32(updateInv.Quantity);
 
-            return Convert.ToInt32(updateInv.Quantity);
+            return newQuantity;
         }
     }
 }

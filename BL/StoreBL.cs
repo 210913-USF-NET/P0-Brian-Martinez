@@ -43,6 +43,10 @@ namespace StoreBL
             return _repo.CreateCart(customerId);
         }
 
+        public Product AddProduct(Product product)
+        {
+            return _repo.AddProduct(product);
+        }
         public List<Product> GetProducts()
         {
             return _repo.GetProducts();

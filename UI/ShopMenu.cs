@@ -39,20 +39,21 @@ namespace UI
                         while (!shop)
                         {
                             cartList.Add(SelectProduct(selectedStore.Inventory, currentOrder.Id));
-                            Console.Write("Would you like to keep shopping? [Y/N]: ");
+                            Console.Write("Continue Shopping? [Y/N]: ");
                             string input = Console.ReadLine().ToLower();
                             if (input == "n")
                             {
                                 currentOrder.LineItems = cartList;
                                 shop = true;
                             }
+                            DisplayCart(currentOrder.LineItems);
                         }
                         break;
                     case "2":
-                        Console.WriteLine("Viewing cart");
+                        DisplayCart(currentOrder.LineItems);
                         break;
                     case "3":
-                        Console.WriteLine("Checking out");
+                        Checkout(selectedStore, currentOrder);
                         break;
                     case "x":
                         exit = true;
@@ -106,16 +107,16 @@ namespace UI
             bool parseSuccess = Int32.TryParse(input, out parsedInput);
             if (parseSuccess && parsedInput >= 0 && parsedInput < storeInv.Count)
             {
-                Product selectedProduct = _bl.GetProduct(storeInv[parsedInput].ProductId.GetValueOrDefault());
+                Product selectedProduct = _bl.GetProduct((int)storeInv[parsedInput].ProductId);
 
             quantity:
                 System.Console.Write("Quantity: ");
                 string quantity = Console.ReadLine();
                 int parsedQuantity;
-                bool parseSuccess2 = Int32.TryParse(input, out parsedQuantity);
+                bool parseSuccess2 = Int32.TryParse(quantity, out parsedQuantity);
                 if (parseSuccess2 && parsedQuantity >= 0 && parsedQuantity <= storeInv[parsedInput].Quantity)
                 {
-                    LineItem itemToAdd = new LineItem(storeInv[parsedInput].StoreId.Value, selectedProduct.Id, parsedQuantity, orderId);
+                    LineItem itemToAdd = new LineItem((int)storeInv[parsedInput].StoreId, selectedProduct.Id, parsedQuantity, orderId);
                     return itemToAdd;
                 }
                 else
@@ -128,6 +129,37 @@ namespace UI
             {
                 Console.WriteLine("Invalid Input");
                 goto shop;
+            }
+        }
+
+        public void DisplayCart(List<LineItem> cart)
+        {
+            int total = 0;
+            foreach (LineItem item in cart)
+            {
+                Product product = _bl.GetProduct(item.ProductId);
+                Console.WriteLine($"{product.Name} | Quantity: {item.Quantity}");
+                total += (int)((product.Price) * item.Quantity);
+            }
+            System.Console.WriteLine($"Total: ${total}");
+        }
+
+        public void Checkout(StoreFront store, Order order)
+        {
+        checkout:
+            Console.Write("Confrim Checkout [Y/N]: ");
+            string input = Console.ReadLine().ToLower();
+            if (input == "y")
+            {
+                _bl.PlaceOrder(order, store);
+                foreach (LineItem item in order.LineItems)
+                {
+                    _bl.UpdateInventory(store, item);
+                }
+            }
+            else
+            {
+                goto checkout;
             }
         }
     }
