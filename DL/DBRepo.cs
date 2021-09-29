@@ -156,22 +156,39 @@ namespace DL
             return order;
         }
 
-        public List<Models.Order> GetAllOrders()
+        public List<Models.Order> GetCustomerOrder(int CustomerId)
         {
-            throw new NotImplementedException();
+            return _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Models.Order()
+            {
+                Id = newOrder.Id,
+                CustomerId = newOrder.CustomerId
+            }).ToList();
+        }
+
+        public List<LineItem> GetOrder(int OrderId)
+        {
+            return (from item in _context.LineItems
+                    where item.OrderId == OrderId
+                    select new Models.LineItem
+                    {
+                        StoreId = item.StoreId,
+                        ProductId = (int)item.ProductId,
+                        Quantity = item.Quantity,
+                        OrderId = (int)item.OrderId
+                    }).ToList();
         }
 
         public List<Models.Product> GetProducts()
         {
             return _context.Products.Select(
-                product => new Models.Product()
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Price = (int)product.Price,
-                    Description = product.Description
-                }
-            ).ToList();
+            product => new Models.Product()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = (int)product.Price,
+                Description = product.Description
+            }
+        ).ToList();
         }
 
         public Models.Product GetProduct(int Id)
@@ -225,8 +242,6 @@ namespace DL
 
         public int UpdateInventory(Models.StoreFront store, Models.LineItem item)
         {
-            bool itemFound = false;
-            int i = 0;
             Models.Inventory test = store.Inventory.FirstOrDefault(i => i.ProductId == item.ProductId && store.Id == i.StoreId);
             Entity.Inventory updateInv = new Entity.Inventory()
             {
@@ -242,6 +257,31 @@ namespace DL
             int newQuantity = Convert.ToInt32(updateInv.Quantity);
 
             return newQuantity;
+        }
+
+        public int AddInventory(int updateInv, int restock)
+        {
+            Entity.Inventory test = (from i in _context.Inventories
+                                     where i.Id == updateInv
+                                     select i).SingleOrDefault();
+
+            test.Quantity = test.Quantity + restock;
+
+            //grab row in inv db alter row then save row
+            // Entity.Inventory restockInv = new Entity.Inventory()
+            // {
+            //     Id = updateInv.Id,
+            //     StoreId = updateInv.StoreId,
+            //     ProductId = updateInv.ProductId,
+            //     Quantity = (int)updateInv.Quantity + restock
+            // };
+
+            test = _context.Inventories.Update(test).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+            int restockQuantity = Convert.ToInt32(test.Quantity);
+
+            return restockQuantity;
         }
     }
 }

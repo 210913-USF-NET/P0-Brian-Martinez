@@ -19,12 +19,14 @@ namespace StoreBL
 
         List<Product> GetProducts();
         Product AddProduct(Product product);
-        List<LineItem> GetLineItem();
+        List<Order> GetCustomerOrder(int CustomerId);
+        List<LineItem> GetOrder(int Id);
 
         Product GetProduct(int Id);
         StoreFront GetStore(int Id);
         List<Inventory> GetInventory();
         int UpdateInventory(StoreFront store, LineItem item);
+        int AddInventory(int inventory, int restock);
         StoreFront AddCustomer(StoreFront newStore);
     }
 }

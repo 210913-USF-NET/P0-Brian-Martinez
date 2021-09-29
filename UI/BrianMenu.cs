@@ -29,8 +29,7 @@ namespace UI
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        ViewAllStoreFronts();
-                        MenuFactory.GetMenu("brianManage").Start();
+                        MenuFactory.GetMenu("brianmanage").Start();
                         break;
                     case "2":
                         CreateStoreFront();

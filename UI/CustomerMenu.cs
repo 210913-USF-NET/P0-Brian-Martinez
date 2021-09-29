@@ -1,13 +1,13 @@
 using System;
-using Models;
-using StoreBL;
-using DL;
 using System.Collections.Generic;
+using StoreBL;
+using Models;
 
 namespace UI
 {
     public class CustomerMenu : IMenu
     {
+        public Customer currentCustomer = MainMenu.currentCustomer;
         private IBL _bl;
 
         public CustomerMenu(IBL bl)
@@ -31,7 +31,7 @@ namespace UI
                         MenuFactory.GetMenu("shop").Start();
                         break;
                     case "2":
-                        Console.WriteLine("View order");
+                        MenuFactory.GetMenu("order").Start();
                         break;
                     case "3":
                         ViewProducts();

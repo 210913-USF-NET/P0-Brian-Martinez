@@ -20,5 +20,10 @@ namespace Models
 
         public virtual Product Product { get; set; }
         public virtual StoreFront Store { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id: {Id} | StoreId: {StoreId} | ProductId: {ProductId} | Q: {Quantity}";
+        }
     }
 }

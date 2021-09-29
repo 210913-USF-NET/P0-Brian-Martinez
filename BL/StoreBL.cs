@@ -76,10 +76,18 @@ namespace StoreBL
         {
             return _repo.UpdateInventory(store, item);
         }
-
-        public List<LineItem> GetLineItem()
+        public int AddInventory(int inventory, int restock)
         {
-            throw new NotImplementedException();
+            return _repo.AddInventory(inventory, restock);
+        }
+
+        public List<Order> GetCustomerOrder(int CustomerId)
+        {
+            return _repo.GetCustomerOrder(CustomerId);
+        }
+        public List<LineItem> GetOrder(int Id)
+        {
+            return _repo.GetOrder(Id);
         }
 
         public StoreFront AddCustomer(StoreFront newStore)

@@ -9,8 +9,6 @@ namespace UI
 {
     public class MenuFactory
     {
-        public static Models.Customer currentCustomer;
-
         public static IMenu GetMenu(string menuString)
         {
             string connectionString = File.ReadAllText(@"../connectionString.txt");
@@ -27,8 +25,10 @@ namespace UI
                     return new BrianMenu(new BL(new DBRepo(context)));
                 case "shop":
                     return new ShopMenu(new BL(new DBRepo(context)));
-                case "brianManage":
-                    return new BrianLocationMenu();
+                case "brianmanage":
+                    return new BrianLocationMenu(new BL(new DBRepo(context)));
+                case "order":
+                    return new OrderMenu(new BL(new DBRepo(context)));
                 default:
                     return null;
             }

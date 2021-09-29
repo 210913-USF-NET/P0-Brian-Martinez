@@ -19,7 +19,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"{this.LineItems}";
+            return $"ID: {Id} | CustomerId: {CustomerId}";
         }
     }
 }

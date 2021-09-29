@@ -8,6 +8,8 @@ namespace UI
 {
     public class MainMenu : IMenu
     {
+        public static Customer currentCustomer;
+
         private IBL _bl;
 
         public MainMenu(IBL bl)
@@ -54,7 +56,6 @@ namespace UI
 
         private void CreateCustomer()
         {
-            Customer user = null;
             Console.WriteLine("Creating new customer");
             Console.Write("First Name: ");
             string firstname = Console.ReadLine();
@@ -65,7 +66,7 @@ namespace UI
 
             Customer newCustomer = new Customer(firstname, lastname, age);
             Customer addedCustomer = _bl.AddCustomer(newCustomer);
-            user = addedCustomer;
+            currentCustomer = addedCustomer;
             Console.WriteLine(addedCustomer.ToString());
         }
 
@@ -87,7 +88,6 @@ namespace UI
 
         private void SearchLastName()
         {
-            Customer user = null;
             Console.Write("Enter last name: ");
             List<Customer> searchResult = _bl.SearchCustomer(Console.ReadLine());
             if (searchResult == null || searchResult.Count == 0)
@@ -107,7 +107,8 @@ namespace UI
             if (parseSuccess && parsedInput >= 0 && parsedInput < searchResult.Count)
             {
                 Customer selectedCustomer = searchResult[parsedInput];
-                MenuFactory.currentCustomer = user;
+                currentCustomer = selectedCustomer;
+                Console.WriteLine(currentCustomer.Id);
                 Console.WriteLine($"Welcome back {selectedCustomer.FirstName}!");
             }
         }

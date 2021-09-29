@@ -7,7 +7,7 @@ namespace UI
 {
     public class ShopMenu : IMenu
     {
-        public Customer currentCustomer = MenuFactory.currentCustomer;
+        public Customer currentCustomer = MainMenu.currentCustomer;
         private IBL _bl;
 
         public ShopMenu(IBL bl)
@@ -18,7 +18,7 @@ namespace UI
         public void Start()
         {
             Order currentOrder = new Order();
-            currentOrder = _bl.CreateCart(1);
+            currentOrder = _bl.CreateCart(currentCustomer.Id);
             StoreFront selectedStore = SelectStoreFront();
             Console.WriteLine($"Welcome to {selectedStore.Name}");
             selectedStore = _bl.GetStore(selectedStore.Id);
