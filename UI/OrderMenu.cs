@@ -60,14 +60,13 @@ namespace UI
                 int total = 0;
                 for (int j = 0; j < item.Count; j++)
                 {
-                    //Log to console the order quantity and the name of the Brew ordered.
                     LineItem test = item[j];
                     Product product = _bl.GetProduct(test.ProductId);
                     Console.WriteLine($"Quantity: {test.Quantity} Name: {product.Name}");
                     total += product.Price;
                 }
                 Console.WriteLine($"Order total was: ${total}");
-                Console.WriteLine("-------------------------------");
+                Console.WriteLine("----------------------------------");
             }
         }
     }
