@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Models;
+using Serilog;
 using StoreBL;
 
 namespace UI
@@ -18,8 +19,8 @@ namespace UI
         public void Start()
         {
             Order currentOrder = new Order();
-            currentOrder = _bl.CreateCart(currentCustomer.Id);
             StoreFront selectedStore = SelectStoreFront();
+            currentOrder = _bl.CreateCart(currentCustomer.Id, selectedStore.Id);
             Console.WriteLine($"Welcome to {selectedStore.Name}");
             selectedStore = _bl.GetStore(selectedStore.Id);
 
@@ -39,6 +40,7 @@ namespace UI
                         while (!shop)
                         {
                             cartList.Add(SelectProduct(selectedStore.Inventory, currentOrder.Id));
+                            Log.Information($"Item(s) added to cart");
                             Console.Write("Continue Shopping? [Y/N]: ");
                             string input = Console.ReadLine().ToLower();
                             if (input == "n")
@@ -54,6 +56,7 @@ namespace UI
                         break;
                     case "3":
                         Checkout(selectedStore, currentOrder);
+                        Log.Information($"Order successfully placed");
                         break;
                     case "x":
                         exit = true;
@@ -83,6 +86,7 @@ namespace UI
             if (parseSuccess && parsedInput >= 0 && parsedInput < allStores.Count)
             {
                 StoreFront selectedStore = allStores[parsedInput];
+                Log.Information($"Accessing {selectedStore} data");
                 return selectedStore;
             }
             else

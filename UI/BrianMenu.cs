@@ -8,6 +8,7 @@ namespace UI
 {
     public class BrianMenu : IMenu
     {
+        public static StoreFront currentStore;
         private IBL _bl;
 
         public BrianMenu(IBL bl)
@@ -68,6 +69,7 @@ namespace UI
             if (parseSuccess && parsedInput >= 0 && parsedInput < allStores.Count)
             {
                 StoreFront selectedStore = allStores[parsedInput];
+                currentStore = selectedStore;
                 Console.WriteLine($"Welcome to {selectedStore.Name}!");
             }
         }

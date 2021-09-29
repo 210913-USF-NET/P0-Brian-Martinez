@@ -74,10 +74,17 @@ namespace DL.Entities
 
             modelBuilder.Entity<Order>(entity =>
             {
+                entity.Property(e => e.OrderDateTime).HasColumnType("datetime");
+
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK__Orders__Customer__160F4887");
+
+                entity.HasOne(d => d.Store)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.StoreId)
+                    .HasConstraintName("FK__Orders__StoreId__245D67DE");
             });
 
             modelBuilder.Entity<Product>(entity =>

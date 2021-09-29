@@ -6,24 +6,24 @@ using StoreBL;
 
 namespace UI
 {
-    public class OrderMenu : IMenu
+    public class BrianOrderMenu : IMenu
     {
-        public Customer currentCustomer = MainMenu.currentCustomer;
+        public StoreFront currentStore = BrianMenu.currentStore;
         private IBL _bl;
 
-        public OrderMenu(IBL bl)
+        public BrianOrderMenu(IBL bl)
         {
             _bl = bl;
         }
 
         public void Start()
         {
-            List<Order> orders = _bl.GetCustomerOrder(currentCustomer.Id);
+            List<Order> orders = _bl.GetStoreOrder(currentStore.Id);
             if (orders.Count == 0)
             {
                 Console.WriteLine("No Previous Orders");
             }
-            List<Order> newestOrders = _bl.GetCustomerOrderNewest(currentCustomer.Id);
+            List<Order> newestOrders = _bl.GetStoreOrderNewest(currentStore.Id);
             if (orders.Count == 0)
             {
                 Console.WriteLine("No Previous Orders");

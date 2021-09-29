@@ -38,9 +38,9 @@ namespace StoreBL
             return _repo.AddStore(store);
         }
 
-        public Order CreateCart(int customerId)
+        public Order CreateCart(int customerId, int StoreId)
         {
-            return _repo.CreateCart(customerId);
+            return _repo.CreateCart(customerId, StoreId);
         }
 
         public Product AddProduct(Product product)
@@ -85,14 +85,22 @@ namespace StoreBL
         {
             return _repo.GetCustomerOrder(CustomerId);
         }
+        public List<Order> GetCustomerOrderNewest(int CustomerId)
+        {
+            return _repo.GetCustomerOrderNewest(CustomerId);
+        }
+        public List<Order> GetStoreOrder(int StoreId)
+        {
+            return _repo.GetStoreOrder(StoreId);
+        }
+        public List<Order> GetStoreOrderNewest(int StoreId)
+        {
+            return _repo.GetStoreOrderNewest(StoreId);
+        }
+
         public List<LineItem> GetOrder(int Id)
         {
             return _repo.GetOrder(Id);
-        }
-
-        public StoreFront AddCustomer(StoreFront newStore)
-        {
-            throw new NotImplementedException();
         }
     }
 }

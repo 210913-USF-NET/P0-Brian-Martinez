@@ -14,8 +14,11 @@ namespace DL.Entities
 
         public int Id { get; set; }
         public int? CustomerId { get; set; }
+        public DateTime? OrderDateTime { get; set; }
+        public int? StoreId { get; set; }
 
         public virtual Customer Customer { get; set; }
+        public virtual StoreFront Store { get; set; }
         public virtual ICollection<LineItem> LineItems { get; set; }
     }
 }

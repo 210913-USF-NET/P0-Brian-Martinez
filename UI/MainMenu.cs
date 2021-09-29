@@ -3,6 +3,7 @@ using Models;
 using StoreBL;
 using DL;
 using System.Collections.Generic;
+using Serilog;
 
 namespace UI
 {
@@ -67,7 +68,7 @@ namespace UI
             Customer newCustomer = new Customer(firstname, lastname, age);
             Customer addedCustomer = _bl.AddCustomer(newCustomer);
             currentCustomer = addedCustomer;
-            Console.WriteLine(addedCustomer.ToString());
+            Log.Information($"Customer: {currentCustomer} successfully added");
         }
 
         private void ViewAllCustomers()

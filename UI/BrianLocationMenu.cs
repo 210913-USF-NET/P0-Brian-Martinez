@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Models;
+using Serilog;
 using StoreBL;
 
 namespace UI
@@ -31,7 +32,7 @@ namespace UI
                         RestockInventory(selectedStore);
                         break;
                     case "2":
-                        Console.WriteLine("Viewing order history");
+                        MenuFactory.GetMenu("brianorder").Start();
                         break;
                     case "x":
                         exit = true;
@@ -90,6 +91,7 @@ namespace UI
             Console.Write("Restock quantity: ");
             int restock = Convert.ToInt32(Console.ReadLine());
             _bl.AddInventory(parsedInput, restock);
+            Log.Information($"Inventory restocked");
             // }
             // else
             // {

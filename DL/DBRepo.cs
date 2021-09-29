@@ -17,6 +17,11 @@ namespace DL
             _context = context;
         }
 
+        /// <summary>
+        /// adding new customer to the database with a full name and age
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         public Models.Customer AddCustomer(Models.Customer customer)
         {
             Entity.Customer customerToAdd = new Entity.Customer()
@@ -39,6 +44,10 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// retrieves all the customers from the database in list form
+        /// </summary>
+        /// <returns></returns>
         public List<Models.Customer> GetAllCustomers()
         {
             return _context.Customers.Select(
@@ -52,6 +61,11 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// returns customer or list of customers where parameter equals last name 
+        /// </summary>
+        /// <param name="queryStr"></param>
+        /// <returns></returns>
         public List<Customer> SearchCustomer(string queryStr)
         {
             return _context.Customers.Where(
@@ -67,6 +81,10 @@ namespace DL
             ).OrderBy(c => c.FirstName).ToList();
         }
 
+        /// <summary>
+        /// retrives all stores from the database
+        /// </summary>
+        /// <returns></returns>
         public List<Models.StoreFront> GetAllStores()
         {
             return _context.StoreFronts.Select(
@@ -118,13 +136,14 @@ namespace DL
             };
         }
 
-        public Models.Order CreateCart(int CustomerId)
+        public Models.Order CreateCart(int CustomerId, int StoreId)
         {
             // Entity.Order cart = new Entity.Order() { };
             // cart.CustomerId = CustomerId;
             Entity.Order cart = new Entity.Order()
             {
-                CustomerId = CustomerId
+                CustomerId = CustomerId,
+                StoreId = StoreId,
             };
             cart = _context.Add(cart).Entity;
             _context.SaveChanges();
@@ -133,7 +152,8 @@ namespace DL
             return new Models.Order()
             {
                 Id = cart.Id,
-                CustomerId = (int)cart.CustomerId
+                CustomerId = (int)cart.CustomerId,
+                StoreId = (int)cart.StoreId
             };
         }
 
@@ -163,6 +183,39 @@ namespace DL
                 Id = newOrder.Id,
                 CustomerId = newOrder.CustomerId
             }).ToList();
+        }
+
+        public List<Models.Order> GetCustomerOrderNewest(int CustomerId)
+        {
+            List<Models.Order> newestOrders = _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Models.Order()
+            {
+                Id = newOrder.Id,
+                CustomerId = newOrder.CustomerId
+            }).ToList();
+
+            newestOrders = newestOrders.OrderBy(x => x.OrderDateTime).ToList();
+            return newestOrders;
+        }
+
+        public List<Models.Order> GetStoreOrder(int StoreId)
+        {
+            return _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Models.Order()
+            {
+                Id = newOrder.Id,
+                StoreId = (int)newOrder.StoreId
+            }).ToList();
+        }
+
+        public List<Models.Order> GetStoreOrderNewest(int StoreId)
+        {
+            List<Models.Order> newestOrders = _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Models.Order()
+            {
+                Id = newOrder.Id,
+                StoreId = (int)newOrder.StoreId
+            }).ToList();
+
+            newestOrders = newestOrders.OrderBy(x => x.OrderDateTime).ToList();
+            return newestOrders;
         }
 
         public List<LineItem> GetOrder(int OrderId)

@@ -29,6 +29,8 @@ namespace UI
                     return new BrianLocationMenu(new BL(new DBRepo(context)));
                 case "order":
                     return new OrderMenu(new BL(new DBRepo(context)));
+                case "brianorder":
+                    return new BrianOrderMenu(new BL(new DBRepo(context)));
                 default:
                     return null;
             }
