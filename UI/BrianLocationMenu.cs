@@ -80,7 +80,7 @@ namespace UI
 
             // Console.WriteLine(store.Inventory[2].ToString());
             // pickProduct:
-            Console.Write("Choose a product to restock: ");
+            Console.Write("Choose a product to restock by ID: ");
             string input = Console.ReadLine();
             int parsedInput;
             bool parseSuccess = Int32.TryParse(input, out parsedInput);

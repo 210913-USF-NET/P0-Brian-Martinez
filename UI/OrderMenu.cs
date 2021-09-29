@@ -74,7 +74,7 @@ namespace UI
                     StoreFront store = _bl.GetStore((int)test.StoreId);
                     Product product = _bl.GetProduct(test.ProductId);
                     Console.WriteLine($"Date: {orders[i].OrderDateTime} | Store: {store.Name} \nQuantity: {test.Quantity} | Name: {product.Name}");
-                    total += product.Price;
+                    total = (int)(total + (product.Price) * (test.Quantity));
                 }
                 Console.WriteLine($"Order total was: ${total}");
                 Console.WriteLine("----------------------------------");

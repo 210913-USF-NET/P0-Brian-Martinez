@@ -9,6 +9,7 @@ namespace UI
     public class BrianMenu : IMenu
     {
         public static StoreFront currentStore;
+        public static Customer chosenCustomer;
         private IBL _bl;
 
         public BrianMenu(IBL bl)
@@ -21,22 +22,32 @@ namespace UI
             bool exit = false;
             do
             {
-                Console.WriteLine("Welcome Master!");
+                Console.WriteLine("Welcome Mr. Martinez!");
                 Console.WriteLine("[1] Manage Locations");
-                Console.WriteLine("[2] Add Location");
-                Console.WriteLine("[3] Add Product");
-                Console.WriteLine("[x] Back to Main Menu");
+                Console.WriteLine("[2] View All Customers");
+                Console.WriteLine("[3] View Customer Order History");
+                Console.WriteLine("[4] Add Location");
+                Console.WriteLine("[5] Add Product");
+                Console.WriteLine("[x] Log Out");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
                         MenuFactory.GetMenu("brianmanage").Start();
                         break;
-                    case "2":
+                    case "4":
                         CreateStoreFront();
                         break;
-                    case "3":
+                    case "5":
                         CreateProduct();
+                        break;
+                    case "2":
+                        ViewAllCustomers();
+                        break;
+                    case "3":
+                        Customer cust = ChooseCustomer();
+                        List<Order> orders = _bl.GetCustomerOrder(cust.Id);
+                        ViewOrderHistory(orders);
                         break;
                     case "x":
                         exit = true;
@@ -98,6 +109,74 @@ namespace UI
             Product newProduct = new Product(name, price, description);
             Product addedProduct = _bl.AddProduct(newProduct);
             Log.Information($"Product: {addedProduct.Name} successfully added");
+        }
+
+        private void ViewAllCustomers()
+        {
+            List<Customer> allCustomers = _bl.GetAllCustomers();
+            if (allCustomers.Count == 0)
+            {
+                Console.WriteLine("There are no existing customers");
+            }
+            else
+            {
+                foreach (Customer customer in allCustomers)
+                {
+                    Console.WriteLine(customer.ToString());
+                }
+            }
+        }
+
+        public Customer ChooseCustomer()
+        {
+            List<Customer> allCustomers = _bl.GetAllCustomers();
+            if (allCustomers.Count == 0)
+            {
+                Console.WriteLine("There are no existing customers");
+            }
+            for (int i = 0; i < allCustomers.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {allCustomers[i]}");
+            }
+
+        pickCustomer:
+            Console.Write("Choose customer: ");
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            if (parseSuccess && parsedInput >= 0 && parsedInput < allCustomers.Count)
+            {
+                Customer selectedCustomer = allCustomers[parsedInput];
+                chosenCustomer = selectedCustomer;
+                return chosenCustomer;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+                goto pickCustomer;
+            }
+        }
+
+        public void ViewOrderHistory(List<Order> orders)
+        {
+            for (int i = 0; i < orders.Count; i++)
+            {
+                Console.WriteLine($"Order Number {i + 1}");
+                List<LineItem> item = _bl.GetOrder(orders[i].Id);
+                int total = 0;
+                for (int j = 0; j < item.Count; j++)
+                {
+                    LineItem test = item[j];
+                    StoreFront store = _bl.GetStore((int)test.StoreId);
+                    Product product = _bl.GetProduct(test.ProductId);
+                    Console.WriteLine($"Date: {orders[i].OrderDateTime} | Store: {store.Name} \nQuantity: {test.Quantity} | Name: {product.Name}");
+                    total = (int)(total + (product.Price) * (test.Quantity));
+                }
+                Console.WriteLine($"Order total was: ${total}");
+                Console.WriteLine("----------------------------------");
+            }
         }
     }
 }

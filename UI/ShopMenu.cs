@@ -43,12 +43,11 @@ namespace UI
                             Log.Information($"Item(s) added to cart");
                             Console.Write("Continue Shopping? [Y/N]: ");
                             string input = Console.ReadLine().ToLower();
-                            if (input == "n")
+                            if (input == "n" || input == "y")
                             {
                                 currentOrder.LineItems = cartList;
                                 shop = true;
                             }
-                            DisplayCart(currentOrder.LineItems);
                         }
                         break;
                     case "2":

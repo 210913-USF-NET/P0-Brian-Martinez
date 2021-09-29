@@ -111,6 +111,13 @@ namespace DL
             {
                 Id = storeToAdd.Id,
                 Name = storeToAdd.Name,
+                Inventory = storeToAdd.Inventories.Select(s => new Models.Inventory()
+                {
+                    Id = s.Id,
+                    StoreId = s.StoreId,
+                    ProductId = s.ProductId,
+                    Quantity = s.Quantity
+                }).ToList()
             };
         }
 
@@ -202,6 +209,7 @@ namespace DL
             return _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Models.Order()
             {
                 Id = newOrder.Id,
+                CustomerId = newOrder.CustomerId,
                 StoreId = (int)newOrder.StoreId
             }).ToList();
         }

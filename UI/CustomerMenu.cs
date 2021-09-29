@@ -23,7 +23,7 @@ namespace UI
                 Console.WriteLine("[1] Shop");
                 Console.WriteLine("[2] View Order(s)");
                 Console.WriteLine("[3] View Products");
-                Console.WriteLine("[x] Back to Main Menu");
+                Console.WriteLine("[x] Log Out");
 
                 switch (Console.ReadLine())
                 {

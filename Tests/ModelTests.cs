@@ -50,5 +50,12 @@ namespace Tests
             Product test = new Product();
             Assert.NotNull(test);
         }
+
+        [Fact]
+        public void OrderShouldBeMade()
+        {
+            Order test = new Order();
+            Assert.NotNull(test);
+        }
     }
 }

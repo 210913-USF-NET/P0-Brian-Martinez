@@ -20,7 +20,10 @@ namespace UI
 
         public void Start()
         {
+            Console.WriteLine("*****************************************\n");
             Console.WriteLine("Welcome to The Beer Garden's console app!");
+            Console.WriteLine("         must be 21 to enter\n");
+            Console.WriteLine("*****************************************\n");
             bool exit = false;
             string input = "";
             do
@@ -65,36 +68,29 @@ namespace UI
             Console.Write("Age: ");
             int age = Convert.ToInt32(Console.ReadLine());
 
-            Customer newCustomer = new Customer(firstname, lastname, age);
-            Customer addedCustomer = _bl.AddCustomer(newCustomer);
-            currentCustomer = addedCustomer;
-            Log.Information($"Customer: {currentCustomer} successfully added");
-        }
-
-        private void ViewAllCustomers()
-        {
-            List<Customer> allCustomers = _bl.GetAllCustomers();
-            if (allCustomers.Count == 0)
+            if (age < 21)
             {
-                Console.WriteLine("There are no existing customers");
+                Console.WriteLine("Grow up kid");
+                Environment.Exit(0);
             }
             else
             {
-                foreach (Customer customer in allCustomers)
-                {
-                    Console.WriteLine(customer.ToString());
-                }
+                Customer newCustomer = new Customer(firstname, lastname, age);
+                Customer addedCustomer = _bl.AddCustomer(newCustomer);
+                currentCustomer = addedCustomer;
+                Log.Information($"Customer: {currentCustomer} successfully added");
             }
         }
 
         private void SearchLastName()
         {
+        login:
             Console.Write("Enter last name: ");
             List<Customer> searchResult = _bl.SearchCustomer(Console.ReadLine());
             if (searchResult == null || searchResult.Count == 0)
             {
                 Console.WriteLine("No Existing Members with that name");
-                return;
+                goto login;
             }
             for (int i = 0; i < searchResult.Count; i++)
             {
