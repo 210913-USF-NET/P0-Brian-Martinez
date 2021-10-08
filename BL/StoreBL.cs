@@ -34,7 +34,7 @@ namespace StoreBL
             return _repo.UpdateCustomer(customerToUpdate);
         }
 
-        public Customer SearchCustomer(string username, string password)
+        public List<Customer> SearchCustomer(string username, string password)
         {
             return _repo.SearchCustomer(username, password);
         }

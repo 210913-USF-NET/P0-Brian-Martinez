@@ -97,9 +97,9 @@ namespace DL
         /// </summary>
         /// <param name="queryStr"></param>
         /// <returns></returns>
-        public Customer SearchCustomer(string username, string password)
+        public List<Customer> SearchCustomer(string username, string password)
         {
-            return (Customer)_context.Customers.Where(
+            return _context.Customers.Where(
                 customer => customer.Username.Contains(username) && customer.Password.Contains(password)
             ).Select(
                 c => new Customer()
@@ -109,7 +109,7 @@ namespace DL
                     Password = c.Password,
                     Age = c.Age
                 }
-            );
+            ).ToList();
         }
 
         public bool Search(string username)

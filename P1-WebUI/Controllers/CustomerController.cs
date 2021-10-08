@@ -29,12 +29,20 @@ namespace P1_WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string password)
         {
-            Customer customer = _bl.SearchCustomer(username, password);
-            if (customer == null)
+            try
             {
-                return RedirectToAction("Index", "Home");
+                var customer = _bl.SearchCustomer(username, password);
+                if (customer.Count == 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt. Please try again");
+                    return View("Login");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            else
+            catch
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -50,7 +58,7 @@ namespace P1_WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Signup(Customer customer)
         {
-            try
+/*            try
             {
                 if (ModelState.IsValid)
                 {
@@ -70,21 +78,21 @@ namespace P1_WebUI.Controllers
             catch
             {
                 return View();
-            }
+            }*/
 
-            /*            try
-                        {
-                            if (ModelState.IsValid)
-                            {
-                                _bl.AddCustomer(customer);
-                                return RedirectToAction("Index", "Home");
-                            }
-                            return RedirectToAction("Index", "Home");
-                        }
-                        catch
-                        {
-                            return View();
-                        }*/
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _bl.AddCustomer(customer);
+                    return RedirectToAction("Index", "Home");
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
