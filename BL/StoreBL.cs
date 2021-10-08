@@ -24,9 +24,28 @@ namespace StoreBL
             return _repo.AddCustomer(customer);
         }
 
-        public List<Customer> SearchCustomer(string queryStr)
+        public Customer GetCustomerById(int Id)
         {
-            return _repo.SearchCustomer(queryStr);
+            return _repo.GetCustomerById(Id);
+        }
+        
+        public Customer UpdateCustomer(Customer customerToUpdate)
+        {
+            return _repo.UpdateCustomer(customerToUpdate);
+        }
+
+        public Customer SearchCustomer(string username, string password)
+        {
+            return _repo.SearchCustomer(username, password);
+        }
+        public bool Search(string username)
+        {
+            return _repo.Search(username);
+        }
+
+        public void RemoveCustomer(int Id)
+        {
+            _repo.RemoveCustomer(Id);
         }
 
         public List<StoreFront> GetAllStores()
@@ -36,6 +55,10 @@ namespace StoreBL
         public StoreFront AddStore(StoreFront store)
         {
             return _repo.AddStore(store);
+        }
+        public StoreFront GetStore(int Id)
+        {
+            return _repo.GetStore(Id);
         }
 
         public Order CreateCart(int customerId, int StoreId)
@@ -57,10 +80,6 @@ namespace StoreBL
             return _repo.GetProduct(Id);
         }
 
-        public StoreFront GetStore(int Id)
-        {
-            return _repo.GetStore(Id);
-        }
 
         public List<Inventory> GetInventory()
         {

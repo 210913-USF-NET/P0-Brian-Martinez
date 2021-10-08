@@ -8,29 +8,34 @@ namespace Models
     {
         public Customer() { }
 
-        public Customer(string firstname) : this()
+        public Customer(int Id) : this()
         {
-            this.FirstName = firstname;
+            this.Id = Id;
         }
 
-        public Customer(string firstname, string lastname) : this(firstname)
+        public Customer(string username) : this()
         {
-            this.LastName = lastname;
+            this.Username = username;
         }
 
-        public Customer(string firstname, string lastname, int age) : this(firstname, lastname)
+        public Customer(string username, string password) : this(username)
+        {
+            this.Password = password;
+        }
+
+        public Customer(string username, string password, int age) : this(username, password)
         {
             this.Age = age;
         }
 
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public int Age { get; set; }
 
         public override string ToString()
         {
-            return $"ID: {this.Id} | NAME: {this.LastName}, {this.FirstName} | AGE: {this.Age}";
+            return $"ID: {this.Id} | USERNAME: {this.Username} | AGE: {this.Age}";
         }
     }
 }

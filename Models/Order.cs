@@ -5,11 +5,8 @@ namespace Models
 {
     public class Order
     {
-        public Order()
-        {
-            this.OrderDateTime = DateTime.Now;
-        }
-        public Order(int StoreId, int OrderId, int CustomerId, List<LineItem> lineItems) : this()
+        public Order() { }
+        public Order(int StoreId, int OrderId, int CustomerId, List<LineItem> lineItems)
         {
             this.Id = OrderId;
             this.StoreId = StoreId;
@@ -22,7 +19,6 @@ namespace Models
         public int StoreId { get; set; }
         public int? CustomerId { get; set; }
         public DateTime OrderDateTime { get; set; }
-        public LineItem LineItem { get; set; }
         public List<LineItem> LineItems { get; set; }
 
         public override string ToString()

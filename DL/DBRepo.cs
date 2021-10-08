@@ -4,15 +4,14 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Models;
-using Entity = DL.Entities;
 
 namespace DL
 {
     public class DBRepo : IRepo
     {
-        private Entity.P0BrianMartinezDBContext _context;
+        private P1_DBContext _context;
 
-        public DBRepo(Entity.P0BrianMartinezDBContext context)
+        public DBRepo(P1_DBContext context)
         {
             _context = context;
         }
@@ -22,12 +21,12 @@ namespace DL
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public Models.Customer AddCustomer(Models.Customer customer)
+        public Customer AddCustomer(Customer customer)
         {
-            Entity.Customer customerToAdd = new Entity.Customer()
+            Customer customerToAdd = new Customer()
             {
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
+                Username = customer.Username,
+                Password = customer.Password,
                 Age = customer.Age
             };
 
@@ -35,30 +34,62 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Models.Customer()
+            return new Customer()
             {
                 Id = customerToAdd.Id,
-                FirstName = customerToAdd.FirstName,
-                LastName = customerToAdd.LastName,
+                Username = customerToAdd.Username,
+                Password = customerToAdd.Password,
                 Age = customerToAdd.Age
-            };
+            }; 
         }
 
         /// <summary>
         /// retrieves all the customers from the database in list form
         /// </summary>
         /// <returns></returns>
-        public List<Models.Customer> GetAllCustomers()
+        public List<Customer> GetAllCustomers()
         {
-            return _context.Customers.Select(
-                customer => new Models.Customer()
+            return _context.Customers.AsNoTracking().Select(
+                customer => new Customer()
                 {
                     Id = customer.Id,
-                    FirstName = customer.FirstName,
-                    LastName = customer.LastName,
+                    Username = customer.Username,
+                    Password = customer.Password,
                     Age = customer.Age
                 }
             ).ToList();
+        }
+
+        public Customer GetCustomerById(int Id)
+        {
+            Customer customer = _context.Customers
+                .AsNoTracking()
+                .FirstOrDefault(c => c.Id == Id);
+
+            return new Customer()
+            {
+                Id = customer.Id,
+                Username = customer.Username,
+                Password = customer.Password,
+                Age = customer.Age
+            };
+        }
+
+        public Customer UpdateCustomer(Customer customerToUpdate)
+        {
+            Customer custToUpdate = new Customer()
+            {
+                Id = customerToUpdate.Id,
+                Username = customerToUpdate.Username,
+                Password = customerToUpdate.Password,
+                Age = customerToUpdate.Age
+            };
+
+            custToUpdate = _context.Customers.Update(custToUpdate).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return custToUpdate;
         }
 
         /// <summary>
@@ -66,29 +97,52 @@ namespace DL
         /// </summary>
         /// <param name="queryStr"></param>
         /// <returns></returns>
-        public List<Customer> SearchCustomer(string queryStr)
+        public Customer SearchCustomer(string username, string password)
         {
-            return _context.Customers.Where(
-                customer => customer.LastName.Contains(queryStr)
+            return (Customer)_context.Customers.Where(
+                customer => customer.Username.Contains(username) && customer.Password.Contains(password)
             ).Select(
-                c => new Models.Customer()
+                c => new Customer()
                 {
                     Id = c.Id,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
+                    Username = c.Username,
+                    Password = c.Password,
                     Age = c.Age
                 }
-            ).OrderBy(c => c.FirstName).ToList();
+            );
+        }
+
+        public bool Search(string username)
+        {
+            Customer check = (Customer)_context.Customers.Where(
+                customer => customer.Username.Contains(username)
+                ).Select(
+                c => new Customer()
+                {
+                    Id = c.Id,
+                    Username = c.Username,
+                    Password = c.Password,
+                    Age = c.Age
+                });
+
+            if (check == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
         /// retrives all stores from the database
         /// </summary>
         /// <returns></returns>
-        public List<Models.StoreFront> GetAllStores()
+        public List<StoreFront> GetAllStores()
         {
             return _context.StoreFronts.Select(
-                store => new Models.StoreFront()
+                store => new StoreFront()
                 {
                     Id = store.Id,
                     Name = store.Name
@@ -96,9 +150,9 @@ namespace DL
             ).ToList();
         }
 
-        public Models.StoreFront AddStore(Models.StoreFront store)
+        public StoreFront AddStore(StoreFront store)
         {
-            Entity.StoreFront storeToAdd = new Entity.StoreFront()
+            StoreFront storeToAdd = new StoreFront()
             {
                 Name = store.Name
             };
@@ -107,11 +161,11 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Models.StoreFront()
+            return new StoreFront()
             {
                 Id = storeToAdd.Id,
                 Name = storeToAdd.Name,
-                Inventory = storeToAdd.Inventories.Select(s => new Models.Inventory()
+                Inventory = storeToAdd.Inventory.Select(s => new Inventory()
                 {
                     Id = s.Id,
                     StoreId = s.StoreId,
@@ -121,9 +175,9 @@ namespace DL
             };
         }
 
-        public Models.Product AddProduct(Models.Product product)
+        public Product AddProduct(Product product)
         {
-            Entity.Product productToAdd = new Entity.Product()
+            Product productToAdd = new Product()
             {
                 Name = product.Name,
                 Price = product.Price,
@@ -134,7 +188,7 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Models.Product()
+            return new Product()
             {
                 Id = productToAdd.Id,
                 Name = productToAdd.Name,
@@ -143,11 +197,11 @@ namespace DL
             };
         }
 
-        public Models.Order CreateCart(int CustomerId, int StoreId)
+        public Order CreateCart(int CustomerId, int StoreId)
         {
             // Entity.Order cart = new Entity.Order() { };
             // cart.CustomerId = CustomerId;
-            Entity.Order cart = new Entity.Order()
+            Order cart = new Order()
             {
                 CustomerId = CustomerId,
                 StoreId = StoreId,
@@ -156,7 +210,7 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Models.Order()
+            return new Order()
             {
                 Id = cart.Id,
                 CustomerId = (int)cart.CustomerId,
@@ -164,11 +218,11 @@ namespace DL
             };
         }
 
-        public Models.Order PlaceOrder(Models.Order order, Models.StoreFront store)
+        public Order PlaceOrder(Order order, StoreFront store)
         {
-            foreach (Models.LineItem item in order.LineItems)
+            foreach (LineItem item in order.LineItems)
             {
-                Entity.LineItem itemToAdd = new Entity.LineItem()
+                LineItem itemToAdd = new LineItem()
                 {
                     StoreId = store.Id,
                     ProductId = item.ProductId,
@@ -183,18 +237,18 @@ namespace DL
             return order;
         }
 
-        public List<Models.Order> GetCustomerOrder(int CustomerId)
+        public List<Order> GetCustomerOrder(int CustomerId)
         {
-            return _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Models.Order()
+            return _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Order()
             {
                 Id = newOrder.Id,
                 CustomerId = newOrder.CustomerId
             }).ToList();
         }
 
-        public List<Models.Order> GetCustomerOrderNewest(int CustomerId)
+        public List<Order> GetCustomerOrderNewest(int CustomerId)
         {
-            List<Models.Order> newestOrders = _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Models.Order()
+            List<Order> newestOrders = _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Order()
             {
                 Id = newOrder.Id,
                 CustomerId = newOrder.CustomerId
@@ -204,9 +258,9 @@ namespace DL
             return newestOrders;
         }
 
-        public List<Models.Order> GetStoreOrder(int StoreId)
+        public List<Order> GetStoreOrder(int StoreId)
         {
-            return _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Models.Order()
+            return _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Order()
             {
                 Id = newOrder.Id,
                 CustomerId = newOrder.CustomerId,
@@ -214,9 +268,9 @@ namespace DL
             }).ToList();
         }
 
-        public List<Models.Order> GetStoreOrderNewest(int StoreId)
+        public List<Order> GetStoreOrderNewest(int StoreId)
         {
-            List<Models.Order> newestOrders = _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Models.Order()
+            List<Order> newestOrders = _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Order()
             {
                 Id = newOrder.Id,
                 StoreId = (int)newOrder.StoreId
@@ -230,7 +284,7 @@ namespace DL
         {
             return (from item in _context.LineItems
                     where item.OrderId == OrderId
-                    select new Models.LineItem
+                    select new LineItem
                     {
                         StoreId = item.StoreId,
                         ProductId = (int)item.ProductId,
@@ -239,10 +293,10 @@ namespace DL
                     }).ToList();
         }
 
-        public List<Models.Product> GetProducts()
+        public List<Product> GetProducts()
         {
             return _context.Products.Select(
-            product => new Models.Product()
+            product => new Product()
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -252,16 +306,16 @@ namespace DL
         ).ToList();
         }
 
-        public Models.Product GetProduct(int Id)
+        public Product GetProduct(int Id)
         {
-            Entity.Product getProduct = _context.Products.FirstOrDefault(p => p.Id == Id);
-            return new Models.Product()
+            Product getProduct = _context.Products.FirstOrDefault(p => p.Id == Id);
+            return new Product()
             {
                 Id = getProduct.Id,
                 Name = getProduct.Name,
                 Price = (int)getProduct.Price,
                 Description = getProduct.Description,
-                Inventory = getProduct.Inventories.Select(p => new Models.Inventory()
+                Inventory = getProduct.Inventory.Select(p => new Inventory()
                 {
                     Id = p.Id,
                     ProductId = p.ProductId,
@@ -270,15 +324,15 @@ namespace DL
             };
         }
 
-        public Models.StoreFront GetStore(int ID)
+        public StoreFront GetStore(int ID)
         {
-            Entity.StoreFront getStore = _context.StoreFronts.Include(s => s.Inventories).FirstOrDefault(s => s.Id == ID);
+            StoreFront getStore = _context.StoreFronts.Include(s => s.Inventory).FirstOrDefault(s => s.Id == ID);
 
-            return new Models.StoreFront()
+            return new StoreFront()
             {
                 Id = getStore.Id,
                 Name = getStore.Name,
-                Inventory = getStore.Inventories.Select(s => new Models.Inventory()
+                Inventory = getStore.Inventory.Select(s => new Inventory()
                 {
                     Id = s.Id,
                     StoreId = s.StoreId,
@@ -288,10 +342,10 @@ namespace DL
             };
         }
 
-        public List<Models.Inventory> GetInventory()
+        public List<Inventory> GetInventory()
         {
             return _context.Inventories.Select(
-                Inventory => new Models.Inventory()
+                Inventory => new Inventory()
                 {
                     Id = Inventory.Id,
                     StoreId = Inventory.StoreId,
@@ -301,10 +355,10 @@ namespace DL
             ).ToList();
         }
 
-        public int UpdateInventory(Models.StoreFront store, Models.LineItem item)
+        public int UpdateInventory(StoreFront store, LineItem item)
         {
-            Models.Inventory test = store.Inventory.FirstOrDefault(i => i.ProductId == item.ProductId && store.Id == i.StoreId);
-            Entity.Inventory updateInv = new Entity.Inventory()
+            Inventory test = store.Inventory.FirstOrDefault(i => i.ProductId == item.ProductId && store.Id == i.StoreId);
+            Inventory updateInv = new Inventory()
             {
                 Id = test.Id,
                 StoreId = store.Id,
@@ -322,7 +376,7 @@ namespace DL
 
         public int AddInventory(int updateInv, int restock)
         {
-            Entity.Inventory test = (from i in _context.Inventories
+            Inventory test = (from i in _context.Inventories
                                      where i.Id == updateInv
                                      select i).SingleOrDefault();
 
@@ -343,6 +397,13 @@ namespace DL
             int restockQuantity = Convert.ToInt32(test.Quantity);
 
             return restockQuantity;
+        }
+
+        public void RemoveCustomer(int Id)
+        {
+            _context.Customers.Remove(GetCustomerById(Id));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
     }
 }

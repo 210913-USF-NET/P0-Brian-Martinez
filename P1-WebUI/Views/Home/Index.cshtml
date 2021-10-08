@@ -1,0 +1,18 @@
+﻿@model Models.Customer
+
+@{
+    ViewData["The Beer Garden"] = "Home Page";
+}
+
+<div class="text-center">
+    <br />
+    <h1 class="display-4" style="color:mintcream;">Welcome to <b style="color:green">The Beer Garden</b></h1>
+    <br />
+    <p style="font-size:20px; color:mintcream;">Shop for your favorite brew selections at whichever store you like!</p>
+</div>
+
+<div class="text-center" style="margin-top:120px">
+    <a class="btn btn-success btn-lg" asp-area="" asp-controller="Customer" asp-action="Login">Log In</a>
+    <p style="font-size:20px; color:mintcream; margin-top:15px;">or</p>
+    <a class="btn btn-outline-success btn-lg" asp-area="" asp-controller="Customer" asp-action="Signup">Sign Up</a>
+</div>

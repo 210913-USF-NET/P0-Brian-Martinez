@@ -7,7 +7,11 @@ namespace DL
     {
         Customer AddCustomer(Customer customer);
         List<Customer> GetAllCustomers();
-        List<Customer> SearchCustomer(string queryStr);
+        Customer SearchCustomer(string username, string password);
+        bool Search(string username);
+        Customer GetCustomerById(int Id);
+        Customer UpdateCustomer(Customer customerToUpdate);
+        void RemoveCustomer(int Id);
 
         List<StoreFront> GetAllStores();
         StoreFront AddStore(StoreFront store);

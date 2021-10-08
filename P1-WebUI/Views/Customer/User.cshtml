@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Models.Customer>
+
+@{
+    ViewData["Title"] = "User";
+}
+
+<h1>User</h1>
+
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd>
+            @Html.DisplayNameFor(model => model.Password)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+    </dl>
+</div>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
