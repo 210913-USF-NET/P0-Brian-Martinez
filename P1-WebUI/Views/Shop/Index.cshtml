@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Shop"] = "Index";
+}
+
+<h1 style="color:mintcream;">What would you like to do?</h1>
+<br />
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">Shop</h5>
+        <p class="card-text">Choose a store location to shop from and buy your favorite beers.</p>
+        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="PickStore">Go Shopping</a>
+    </div>
+</div>
+<br />
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">View Order History</h5>
+        <p class="card-text">Go through previous orders and filter them by price or by date ordered.</p>
+        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="PickStore">Go to Orders</a>
+    </div>
+</div>
+<br />
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">View Products</h5>
+        <p class="card-text">Look at the extremely narrow selection before heading into the store.</p>
+        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="PickStore">Go view Products</a>
+    </div>
+</div>
+
+

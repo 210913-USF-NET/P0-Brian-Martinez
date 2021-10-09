@@ -13,7 +13,7 @@ namespace StoreBL
         Customer UpdateCustomer(Customer customerToUpdate);
         void RemoveCustomer(int Id);
         List<Customer> SearchCustomer(string username, string password);
-        bool Search(string username);
+        List<Customer> Search(string username);
 
         //StoreFronts
         StoreFront AddStore(StoreFront store);

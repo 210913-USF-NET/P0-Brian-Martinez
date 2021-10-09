@@ -12,6 +12,8 @@ namespace P1_WebUI.Controllers
 {
     public class CustomerController : Controller
     {
+        public static Customer currentCustomer;
+
         private IBL _bl;
 
         public CustomerController(IBL bl)
@@ -32,19 +34,25 @@ namespace P1_WebUI.Controllers
             try
             {
                 var customer = _bl.SearchCustomer(username, password);
+                currentCustomer = customer[0];
                 if (customer.Count == 0)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt. Please try again");
+                    ModelState.AddModelError(string.Empty, "Invalid Login Attempt. Please try again");
                     return View("Login");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    if (username == "brian" && password == "brian")
+                    {
+                        return RedirectToAction("Index", "Brian");
+                    }
+                    return RedirectToAction("Index", "Shop", currentCustomer);
                 }
             }
             catch
             {
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt. Please try again");
+                return View("Login");
             }
         }
 
@@ -58,36 +66,24 @@ namespace P1_WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Signup(Customer customer)
         {
-/*            try
-            {
-                if (ModelState.IsValid)
-                {
-                    bool check = _bl.Search(customer.Username);
-                    if (check == false)
-                    {
-                        _bl.AddCustomer(customer);
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                return RedirectToAction("Index", "Home");
-            }
-            catch
-            {
-                return View();
-            }*/
-
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _bl.AddCustomer(customer);
-                    return RedirectToAction("Index", "Home");
+                    var check = _bl.Search(customer.Username);
+                    if (check.Count == 0)
+                    {
+                        _bl.AddCustomer(customer);
+                        currentCustomer = customer;
+                        return RedirectToAction("Index", "Shop", currentCustomer);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Username already exists. Please try again");
+                        return View("Signup");
+                    }
                 }
-                return RedirectToAction("Index", "Home");
+                return View("Signup");
             }
             catch
             {

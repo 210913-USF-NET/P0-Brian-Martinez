@@ -8,7 +8,7 @@ namespace DL
         Customer AddCustomer(Customer customer);
         List<Customer> GetAllCustomers();
         List<Customer> SearchCustomer(string username, string password);
-        bool Search(string username);
+        List<Customer> Search(string username);
         Customer GetCustomerById(int Id);
         Customer UpdateCustomer(Customer customerToUpdate);
         void RemoveCustomer(int Id);

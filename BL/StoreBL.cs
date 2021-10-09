@@ -38,7 +38,7 @@ namespace StoreBL
         {
             return _repo.SearchCustomer(username, password);
         }
-        public bool Search(string username)
+        public List<Customer> Search(string username)
         {
             return _repo.Search(username);
         }

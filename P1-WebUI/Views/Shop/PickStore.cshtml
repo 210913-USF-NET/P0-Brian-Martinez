@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Models.StoreFront>
+
+@{
+    ViewData["Shop"] = "PickStore";
+}
+
+<h1 style="color:mintcream;">Pick Store</h1>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Cherry Valley Beer Garden</h5>
+                <p class="card-text">The original beer garden. Filled with everything you desire and more.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Cherry Valley</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Downtown Beer Garden</h5>
+                <p class="card-text">In the city that doesn't sleep, we provide for those that go all night.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Downtown</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Seaside Beer Garden</h5>
+                <p class="card-text">Nothing beats a nice beach brew so just come in and get yours already. </p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Seaside</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Mount Pine Beer Garden</h5>
+                <p class="card-text">Newest location in the middle of no where. Marketing stunt gone wrong.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Mount Pine</a>
+            </div>
+        </div>
+    </div>
+</div>

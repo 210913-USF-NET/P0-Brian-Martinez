@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Models.Product>
+
+@{
+    ViewData["Shop"] = "Shop";
+}
+
+<h1>Shop</h1>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Goose Island 312 Lemonade Shandy</h5>
+                <p class="card-text">Easy drinking and session-able, 312 Lemonade Shandy is sure to hit the spot.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Cherry Valley</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Victory Twisted Monkey </h5>
+                <p class="card-text">Fruity Belgian yeast enhanced with an exciting twist of mango.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Downtown</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Blue Point Toasted Lager</h5>
+                <p class="card-text">The best American Amber Lager you will ever taste.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Seaside</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">UFO White Beer</h5>
+                <p class="card-text">Brewed with orange peel abd coriander, it is a perfect choice any occassion.</p>
+                <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop">Go to Mount Pine</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -112,9 +112,9 @@ namespace DL
             ).ToList();
         }
 
-        public bool Search(string username)
+        public List<Customer> Search(string username)
         {
-            Customer check = (Customer)_context.Customers.Where(
+            return _context.Customers.Where(
                 customer => customer.Username.Contains(username)
                 ).Select(
                 c => new Customer()
@@ -123,16 +123,7 @@ namespace DL
                     Username = c.Username,
                     Password = c.Password,
                     Age = c.Age
-                });
-
-            if (check == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+                }).ToList();
         }
 
         /// <summary>
@@ -233,6 +224,11 @@ namespace DL
                 _context.SaveChanges();
                 _context.ChangeTracker.Clear();
             }
+
+            order.OrderDateTime = DateTime.Now;
+            _context.Update(order);
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
 
             return order;
         }
