@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using StoreBL;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,8 @@ namespace P1_WebUI.Controllers
         // GET: ShopController/Edit/5
         public ActionResult Shop()
         {
-            return View();
+            List<Product> allProducts = _bl.GetProducts();
+            return View(allProducts);
         }
 
         // POST: ShopController/Edit/5
