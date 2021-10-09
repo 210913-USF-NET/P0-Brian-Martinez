@@ -43,7 +43,7 @@ namespace P1_WebUI.Controllers
         }
 
         // GET: ShopController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Shop()
         {
             return View();
         }

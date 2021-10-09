@@ -401,5 +401,27 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
         }
+
+        public Inventory CreateInventory(Inventory inventory)
+        {
+            Inventory invToAdd = new Inventory()
+            {
+                StoreId = inventory.StoreId,
+                ProductId = inventory.ProductId,
+                Quantity = inventory.Quantity
+            };
+
+            invToAdd = _context.Add(invToAdd).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Inventory()
+            {
+                Id = invToAdd.Id,
+                StoreId = invToAdd.StoreId,
+                ProductId = invToAdd.ProductId,
+                Quantity = invToAdd.Quantity
+            };
+        }
     }
 }

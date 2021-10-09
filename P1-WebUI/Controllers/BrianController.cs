@@ -51,6 +51,60 @@ namespace P1_WebUI.Controllers
             }
         }
 
+        // GET: BrianController/Create
+        public ActionResult CreateProduct()
+        {
+            return View();
+        }
+
+        // POST: BrianController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateProduct(Product product)
+        {
+            try
+            {
+                //if the data in my form is valid
+                if (ModelState.IsValid)
+                {
+                    _bl.AddProduct(product);
+                    return View("Index");
+                }
+                return View("Index");
+            }
+            catch
+            {
+                return View("Index");
+            }
+        }
+
+        // GET: BrianController/Create
+        public ActionResult CreateInventory()
+        {
+            return View();
+        }
+
+        // POST: BrianController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateInventory(Inventory inventory)
+        {
+            try
+            {
+                //if the data in my form is valid
+                if (ModelState.IsValid)
+                {
+                    _bl.CreateInventory(inventory);
+                    return View("Index");
+                }
+                return View("Index");
+            }
+            catch
+            {
+                return View("Index");
+            }
+        }
+
         // GET: BrianController/Edit/5
         public ActionResult Edit(int id)
         {
