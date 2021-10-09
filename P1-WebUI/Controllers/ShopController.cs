@@ -11,6 +11,8 @@ namespace P1_WebUI.Controllers
 {
     public class ShopController : Controller
     {
+        public Customer currentCustomer = CustomerController.currentCustomer;
+
         private IBL _bl;
         public ShopController(IBL bl)
         {
@@ -19,7 +21,7 @@ namespace P1_WebUI.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(CustomerController.currentCustomer);
         }
 
         // GET: ShopController
@@ -28,24 +30,13 @@ namespace P1_WebUI.Controllers
             return View();
         }
 
-        // POST: ShopController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult PickStore(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: ShopController/Edit/5
         public ActionResult Shop()
         {
+           /* Order currentOrder = new Order();
+            currentOrder = _bl.CreateCart(currentCustomer.Id, selectedStore.Id);*/
+
+
             List<Product> allProducts = _bl.GetProducts();
             return View(allProducts);
         }

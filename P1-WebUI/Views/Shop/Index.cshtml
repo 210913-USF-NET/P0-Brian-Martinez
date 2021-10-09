@@ -1,9 +1,15 @@
-﻿
+﻿@model Models.Customer
+
 @{
     ViewData["Shop"] = "Index";
 }
 
-<h1 style="color:mintcream;">What would you like to do?</h1>
+<dl class="row">
+    <dd class="col" style="color:green; font-size:40px;">
+        <span style="color:mintcream">Welcome back </span> <b>@Html.DisplayFor(model => model.Username)</b>
+    </dd>
+</dl>
+<h2 style="color:mintcream;">What would you like to do?</h2>
 <br />
 <div class="card text-center">
     <div class="card-body">
