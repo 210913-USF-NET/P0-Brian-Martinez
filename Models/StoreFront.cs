@@ -16,7 +16,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"{this.Name}";
+            return $"ID: {this.Id} | NAME: {this.Name}";
         }
     }
 }

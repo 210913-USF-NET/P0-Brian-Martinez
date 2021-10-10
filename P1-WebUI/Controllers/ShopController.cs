@@ -31,13 +31,25 @@ namespace P1_WebUI.Controllers
             return View(allStores);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PickStore(int id)
+        {
+            try
+            {
+                StoreFront selectedStore = _bl.GetStore(id);
+                return RedirectToAction("Shop", "Shop", selectedStore);
+            }
+            catch
+            {
+                ModelState.AddModelError(string.Empty, "Error in choosing store. Try again.");
+                return RedirectToAction("PickStore", "Shop");
+            }
+        }
+
         // GET: ShopController/Edit/5
         public ActionResult Shop()
         {
-           /* Order currentOrder = new Order();
-            currentOrder = _bl.CreateCart(currentCustomer.Id, selectedStore.Id);*/
-
-
             List<Product> allProducts = _bl.GetProducts();
             return View(allProducts);
         }
@@ -45,10 +57,15 @@ namespace P1_WebUI.Controllers
         // POST: ShopController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Shop(StoreFront store)
         {
             try
             {
+                Order currentOrder = new Order();
+                currentOrder = _bl.CreateCart(currentCustomer.Id, store.Id);
+
+                List<LineItem> cartList = new List<LineItem>();
+                cartList.Add()
                 return RedirectToAction(nameof(Index));
             }
             catch
