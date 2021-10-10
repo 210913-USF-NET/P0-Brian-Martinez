@@ -6,7 +6,26 @@
 
 <h1 style="color:mintcream;">Pick Store</h1>
 <br />
-<div class="row">
+
+<div class="container">
+    <div class="row" style="display:flex; flex-wrap:wrap;">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3" style="display:flex;">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop" asp-route-id="@item.Id">Go to location</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*<div class="row">
     <div class="col-sm-6">
         <div class="card">
             <div class="card-body">
@@ -46,4 +65,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@

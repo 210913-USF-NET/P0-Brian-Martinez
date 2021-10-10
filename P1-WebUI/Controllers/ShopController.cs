@@ -27,7 +27,8 @@ namespace P1_WebUI.Controllers
         // GET: ShopController
         public ActionResult PickStore()
         {
-            return View();
+            List<StoreFront> allStores = _bl.GetAllStores();
+            return View(allStores);
         }
 
         // GET: ShopController/Edit/5
