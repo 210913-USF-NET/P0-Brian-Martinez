@@ -338,6 +338,19 @@ namespace DL
             };
         }
 
+        public Inventory GetInventoryById(int StoreId, int ProductId)
+        {
+            Inventory getInventory = _context.Inventories.FirstOrDefault(i => i.StoreId == StoreId &&  i.ProductId == ProductId);
+
+            return new Inventory()
+            {
+                Id = getInventory.Id,
+                StoreId = getInventory.StoreId,
+                ProductId = getInventory.ProductId,
+                Quantity =getInventory.Quantity
+            };
+        }
+
         public List<Inventory> GetInventory()
         {
             return _context.Inventories.Select(

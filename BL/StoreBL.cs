@@ -122,6 +122,11 @@ namespace StoreBL
             return _repo.GetOrder(Id);
         }
 
+        public Inventory GetInventoryById(int StoreId, int ProductId)
+        {
+            return _repo.GetInventoryById(StoreId, ProductId);
+        }
+
         public Inventory CreateInventory(Inventory inventory)
         {
             return _repo.CreateInventory(inventory);

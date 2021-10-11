@@ -30,6 +30,7 @@ namespace DL
         Order PlaceOrder(Order order, StoreFront store);
         int AddInventory(int inventory, int restock);
         int UpdateInventory(StoreFront store, LineItem item);
+        Inventory GetInventoryById(int StoreId, int ProductId);
 
 
         Inventory CreateInventory(Inventory inventory);

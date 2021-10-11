@@ -8,19 +8,22 @@
 <br />
 
 <div class="container">
-    <div class="row" style="display:flex; flex-wrap:wrap;">
+    <form class="row" asp-action="PickStore">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         @foreach (var item in Model)
         {
-            <div class="col-sm-3" style="display:flex;">
+            <div class="col-sm-3 form-group" style="display:flex;">
                 <div class="card">
                     <div class="card-block">
                         <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
-                        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="Shop" asp-route-id="@item.Id">Go to location</a>
+                        @*<input asp-for="@item" name="@item" class="btn btn-success form-control" type="submit" value="Go to location" />*@
+                        @Html.ActionLink("Go to location", "Order", "Order", new { id = item.Id })
+                        <span asp-validation-for="@item" class="text-danger"></span>
                     </div>
                 </div>
             </div>
         }
-    </div>
+    </form>
 </div>
 
 
