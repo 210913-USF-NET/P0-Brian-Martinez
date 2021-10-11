@@ -12,7 +12,6 @@ namespace P1_WebUI.Controllers
     public class OrderController : Controller
     {
         public Customer currentCustomer = CustomerController.currentCustomer;
-        public StoreFront selectedStore = ShopController.selectedStore;
 
         private IBL _bl;
         public OrderController(IBL bl)
@@ -29,11 +28,15 @@ namespace P1_WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Order(int id)
+        public ActionResult Order(int id, Product item, int quantity)
         {
             StoreFront store = _bl.GetStore(id);
             Order currentOrder = new Order();
             currentOrder = _bl.CreateCart(currentCustomer.Id, store.Id);
+
+            List<LineItem> cartList = new List<LineItem>();
+            LineItem itemToAdd = new LineItem(id, item.Id, quantity, currentOrder.Id);
+            cartList.Add(itemToAdd);
             return View();
         }
 

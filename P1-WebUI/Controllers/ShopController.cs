@@ -11,7 +11,6 @@ namespace P1_WebUI.Controllers
 {
     public class ShopController : Controller
     {
-        public static StoreFront selectedStore;
         public Customer currentCustomer = CustomerController.currentCustomer;
 
         private IBL _bl;
@@ -39,8 +38,7 @@ namespace P1_WebUI.Controllers
             try
             {
                 StoreFront store = _bl.GetStore(id);
-                selectedStore = store;
-                return RedirectToAction("Order", "Order", selectedStore);
+                return RedirectToAction("Order", "Order", store);
             }
             catch
             {
