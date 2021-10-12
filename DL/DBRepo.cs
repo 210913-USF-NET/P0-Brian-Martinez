@@ -376,28 +376,6 @@ namespace DL
                 ProductId = test.ProductId,
                 Quantity = test.Quantity
             };
-                
-                /*(from i in _context.Inventories
-                                     where i.Id == updateInv
-                                     select i).SingleOrDefault();
-
-            test.Quantity = test.Quantity + restock;*/
-
-            //grab row in inv db alter row then save row
-            // Entity.Inventory restockInv = new Entity.Inventory()
-            // {
-            //     Id = updateInv.Id,
-            //     StoreId = updateInv.StoreId,
-            //     ProductId = updateInv.ProductId,
-            //     Quantity = (int)updateInv.Quantity + restock
-            // };
-
-/*            test = _context.Inventories.Update(test).Entity;
-            _context.SaveChanges();
-            _context.ChangeTracker.Clear();
-            int restockQuantity = Convert.ToInt32(test.Quantity);
-
-            return restockQuantity;*/
         }
 
         public void RemoveCustomer(int Id)

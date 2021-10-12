@@ -52,19 +52,12 @@ namespace P1_WebUI.Controllers
             return View(cartList);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Checkout()
+        // GET: OrderController
+        public ActionResult PlaceOrder()
         {
             currentOrder.LineItems = cartList;
-            Order checkout = _bl.PlaceOrder(currentOrder, currentStore);
+            _bl.PlaceOrder(currentOrder, currentStore);
             return RedirectToAction("Index", "Shop");
-        }
-
-        // GET: OrderController
-        public ActionResult Index()
-        {
-            return View();
         }
 
         // GET: OrderController/Details/5
