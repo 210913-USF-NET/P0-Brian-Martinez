@@ -47,6 +47,7 @@ namespace P1_WebUI.Controllers
             ViewBag.StoreFront = store;*/
 
             LineItem itemToAdd = new LineItem(currentStore.Id, item, quantity, currentOrder.Id);
+            itemToAdd.item = _bl.GetProduct(itemToAdd.ProductId);
             /*itemToAdd = _bl.AddLineItem(itemToAdd);*/
             cartList.Add(itemToAdd);
             return View(cartList);

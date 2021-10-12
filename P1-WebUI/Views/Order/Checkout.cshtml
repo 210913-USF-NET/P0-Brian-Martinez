@@ -12,13 +12,10 @@
         <thead style="color: mintcream;">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.StoreId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductId)
+                    @Html.DisplayNameFor(model => model.item.Name)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Quantity)
@@ -34,13 +31,10 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.StoreId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ProductId)
+                        @Html.DisplayFor(modelItem => item.item.Name)
                         @*@ViewBag.Product.Name*@
                     </td>
                     <td>
@@ -58,9 +52,19 @@
         </tbody>
     </table>
 
-    @Html.ActionLink("Continue Shopping", "PickStore", "Shop")
+    @{ 
+        int total = 0;
+        string totalString = "";
+        foreach (var item in Model)
+        {
+            total += item.item.Price * (int)item.Quantity;
+        }
+        totalString = total.ToString();
+    }
 
-    <br />
+    <h3 style="color:mintcream">TOTAL: $@totalString</h3>
 
-    @Html.ActionLink("Place Order", "PlaceOrder", "Order")
+    @Html.ActionLink("Continue Shopping", "PickStore", "Shop", null, new { @class = "btn btn-success" })
+    <span style="color: #202120">o</span>
+    @Html.ActionLink("Place Order", "PlaceOrder", "Order", null, new { @class = "btn btn-success" })
 </form>

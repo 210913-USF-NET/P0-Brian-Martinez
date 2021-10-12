@@ -11,7 +11,6 @@ namespace Models
             this.Id = OrderId;
             this.CustomerId = CustomerId;
             this.LineItems = lineItems;
-/*            this.OrderDateTime = DateTime.Now;*/
         }
 
         public int Id { get; set; }
