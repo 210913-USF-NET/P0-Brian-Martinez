@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Product> 
+﻿@model IEnumerable<Models.Product>
 
 @{
     ViewData["Shop"] = "Order";
@@ -17,7 +17,8 @@
                 {
                     <div class="row">
                         <div class="form-check col-4">
-                            <input asp-for="@item.Id" type="radio"  name="item"  value="@item">
+                            <input asp-for="@item.Id" type="radio" name="item" value="@item.Id">
+                            @*@Html.ActionLink("Go to location", "Order", "Order", new { id = item.Id })*@
                             <label asp-for="@item.Id" style="color:mintcream;">
                                 @Html.DisplayFor(modelItem => item.Name)
                             </label>
@@ -40,6 +41,11 @@
     <div class="form-group row">
         <div class="col-sm-10">
             <input type="submit" value="Order" class="btn btn-success" />
+            @*@Html.ActionLink("Add to Cart", "Checkout", "Order", new {  })*@
         </div>
     </div>
 </form>
+
+@*<div class="row">
+    @Html.ActionLink("View Cart", "ViewCart", "Order", new);
+</div>*@

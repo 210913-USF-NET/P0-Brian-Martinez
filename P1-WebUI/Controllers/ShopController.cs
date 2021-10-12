@@ -12,6 +12,7 @@ namespace P1_WebUI.Controllers
     public class ShopController : Controller
     {
         public Customer currentCustomer = CustomerController.currentCustomer;
+        public StoreFront currentStore;
 
         private IBL _bl;
         public ShopController(IBL bl)
@@ -38,6 +39,7 @@ namespace P1_WebUI.Controllers
             try
             {
                 StoreFront store = _bl.GetStore(id);
+                currentStore = store;
                 return RedirectToAction("Order", "Order", store);
             }
             catch

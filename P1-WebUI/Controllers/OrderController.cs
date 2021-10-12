@@ -12,6 +12,8 @@ namespace P1_WebUI.Controllers
     public class OrderController : Controller
     {
         public Customer currentCustomer = CustomerController.currentCustomer;
+        public Order currentOrder = CustomerController.currentOrder;
+        public static List<LineItem> cartList = new List<LineItem>();
 
         private IBL _bl;
         public OrderController(IBL bl)
@@ -28,45 +30,46 @@ namespace P1_WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Order(int id, Product item, int quantity)
+        public ActionResult Order(int id, int item, int quantity)
         {
-            StoreFront store = _bl.GetStore(id);
-            Order currentOrder = new Order();
-            currentOrder = _bl.CreateCart(currentCustomer.Id, store.Id);
-
-            List<LineItem> cartList = new List<LineItem>();
-            LineItem itemToAdd = new LineItem(id, item.Id, quantity, currentOrder.Id);
-            cartList.Add(itemToAdd);
-            return View();
+            return RedirectToAction("Checkout", "Order", new { id = id, item = item, quantity = quantity});
         }
 
-/*        // POST: ShopController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Order(Order order, Product product, int quantity)
+        public ActionResult Checkout(int id, int item, int quantity)
         {
-            try
-            {
-                Inventory storeInv = _bl.GetInventoryById(order.StoreId, product.Id);
-                List<LineItem> cartList = new List<LineItem>();
-                if (quantity > storeInv.Quantity)
+            LineItem itemToAdd = new LineItem(id, item, quantity, currentOrder.Id);
+            /*itemToAdd = _bl.AddLineItem(itemToAdd);*/
+            cartList.Add(itemToAdd);
+            return View(cartList);
+        }
+
+        /*        // POST: ShopController/Edit/5
+                [HttpPost]
+                [ValidateAntiForgeryToken]
+                public ActionResult Order(Order order, Product product, int quantity)
                 {
-                    ModelState.AddModelError(string.Empty, "Cannot select more than we have in stock. Try again.");
-                    return RedirectToAction("Shop", "Shop");
-                }
-                else
-                {
-                    LineItem itemToAdd = new LineItem(order.StoreId, product.Id, quantity, order.Id);
-                    cartList.Add(itemToAdd);
-                    return View("MoreShop");
-                }
-            }
-            catch
-            {
-                ModelState.AddModelError(string.Empty, "Shopping error. Try again.");
-                return RedirectToAction("Index", "Home");
-            }
-        }*/
+                    try
+                    {
+                        Inventory storeInv = _bl.GetInventoryById(order.StoreId, product.Id);
+                        List<LineItem> cartList = new List<LineItem>();
+                        if (quantity > storeInv.Quantity)
+                        {
+                            ModelState.AddModelError(string.Empty, "Cannot select more than we have in stock. Try again.");
+                            return RedirectToAction("Shop", "Shop");
+                        }
+                        else
+                        {
+                            LineItem itemToAdd = new LineItem(order.StoreId, product.Id, quantity, order.Id);
+                            cartList.Add(itemToAdd);
+                            return View("MoreShop");
+                        }
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError(string.Empty, "Shopping error. Try again.");
+                        return RedirectToAction("Index", "Home");
+                    }
+                }*/
 
 
 

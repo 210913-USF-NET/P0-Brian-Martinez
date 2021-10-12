@@ -6,17 +6,15 @@ namespace Models
     public class Order
     {
         public Order() { }
-        public Order(int StoreId, int OrderId, int CustomerId, List<LineItem> lineItems)
+        public Order(int OrderId, int CustomerId, List<LineItem> lineItems)
         {
             this.Id = OrderId;
-            this.StoreId = StoreId;
             this.CustomerId = CustomerId;
             this.LineItems = lineItems;
             this.OrderDateTime = DateTime.Now;
         }
 
         public int Id { get; set; }
-        public int StoreId { get; set; }
         public int? CustomerId { get; set; }
         public DateTime OrderDateTime { get; set; }
         public List<LineItem> LineItems { get; set; }

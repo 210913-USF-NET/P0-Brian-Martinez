@@ -13,6 +13,7 @@ namespace P1_WebUI.Controllers
     public class CustomerController : Controller
     {
         public static Customer currentCustomer;
+        public static Order currentOrder;
 
         private IBL _bl;
 
@@ -35,6 +36,7 @@ namespace P1_WebUI.Controllers
             {
                 var customer = _bl.SearchCustomer(username, password);
                 currentCustomer = customer[0];
+
                 if (customer.Count == 0)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid Login Attempt. Please try again");
@@ -42,11 +44,17 @@ namespace P1_WebUI.Controllers
                 }
                 else
                 {
+/*                    Response.Cookies.Append("CurrentCustomerId", currentCustomer.Id.ToString());
+                    Response.Cookies.Append("CurrentCustomerUsername", currentCustomer.Username);*/
                     if (username == "brian" && password == "brian")
                     {
                         return RedirectToAction("Index", "Brian");
                     }
-                    return RedirectToAction("Index", "Shop", currentCustomer);
+                    else
+                    {
+                        currentOrder = _bl.CreateCart(currentCustomer.Id);
+                        return RedirectToAction("Index", "Shop", currentCustomer);
+                    }
                 }
             }
             catch
@@ -75,6 +83,8 @@ namespace P1_WebUI.Controllers
                     {
                         _bl.AddCustomer(customer);
                         currentCustomer = customer;
+                        Response.Cookies.Append("CurrentCustomerId", currentCustomer.Id.ToString());
+                        Response.Cookies.Append("CurrentCustomerUsername", currentCustomer.Username);
                         return RedirectToAction("Index", "Shop", currentCustomer);
                     }
                     else

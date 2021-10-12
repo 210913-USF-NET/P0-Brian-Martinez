@@ -61,9 +61,9 @@ namespace StoreBL
             return _repo.GetStore(Id);
         }
 
-        public Order CreateCart(int customerId, int StoreId)
+        public Order CreateCart(int customerId)
         {
-            return _repo.CreateCart(customerId, StoreId);
+            return _repo.CreateCart(customerId);
         }
 
         public Product AddProduct(Product product)
@@ -107,14 +107,6 @@ namespace StoreBL
         public List<Order> GetCustomerOrderNewest(int CustomerId)
         {
             return _repo.GetCustomerOrderNewest(CustomerId);
-        }
-        public List<Order> GetStoreOrder(int StoreId)
-        {
-            return _repo.GetStoreOrder(StoreId);
-        }
-        public List<Order> GetStoreOrderNewest(int StoreId)
-        {
-            return _repo.GetStoreOrderNewest(StoreId);
         }
 
         public List<LineItem> GetOrder(int Id)

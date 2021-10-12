@@ -188,14 +188,13 @@ namespace DL
             };
         }
 
-        public Order CreateCart(int CustomerId, int StoreId)
+        public Order CreateCart(int CustomerId)
         {
             // Entity.Order cart = new Entity.Order() { };
             // cart.CustomerId = CustomerId;
             Order cart = new Order()
             {
-                CustomerId = CustomerId,
-                StoreId = StoreId,
+                CustomerId = CustomerId
             };
             cart = _context.Add(cart).Entity;
             _context.SaveChanges();
@@ -205,7 +204,6 @@ namespace DL
             {
                 Id = cart.Id,
                 CustomerId = (int)cart.CustomerId,
-                StoreId = (int)cart.StoreId
             };
         }
 
@@ -254,28 +252,6 @@ namespace DL
             return newestOrders;
         }
 
-        public List<Order> GetStoreOrder(int StoreId)
-        {
-            return _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Order()
-            {
-                Id = newOrder.Id,
-                CustomerId = newOrder.CustomerId,
-                StoreId = (int)newOrder.StoreId
-            }).ToList();
-        }
-
-        public List<Order> GetStoreOrderNewest(int StoreId)
-        {
-            List<Order> newestOrders = _context.Orders.Where(o => o.StoreId == StoreId).Select(newOrder => new Order()
-            {
-                Id = newOrder.Id,
-                StoreId = (int)newOrder.StoreId
-            }).ToList();
-
-            newestOrders = newestOrders.OrderBy(x => x.OrderDateTime).ToList();
-            return newestOrders;
-        }
-
         public List<LineItem> GetOrder(int OrderId)
         {
             return (from item in _context.LineItems
@@ -311,30 +287,18 @@ namespace DL
                 Name = getProduct.Name,
                 Price = (int)getProduct.Price,
                 Description = getProduct.Description,
-                Inventory = getProduct.Inventory.Select(p => new Inventory()
-                {
-                    Id = p.Id,
-                    ProductId = p.ProductId,
-                    Quantity = p.Quantity
-                }).ToList()
             };
         }
 
         public StoreFront GetStore(int ID)
         {
-            StoreFront getStore = _context.StoreFronts.Include(s => s.Inventory).FirstOrDefault(s => s.Id == ID);
+            /*Include(s => s.Inventory)*/
+            StoreFront getStore = _context.StoreFronts.FirstOrDefault(s => s.Id == ID);
 
             return new StoreFront()
             {
                 Id = getStore.Id,
                 Name = getStore.Name,
-                Inventory = getStore.Inventory.Select(s => new Inventory()
-                {
-                    Id = s.Id,
-                    StoreId = s.StoreId,
-                    ProductId = s.ProductId,
-                    Quantity = s.Quantity
-                }).ToList()
             };
         }
 

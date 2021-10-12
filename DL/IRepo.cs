@@ -17,10 +17,8 @@ namespace DL
         StoreFront AddStore(StoreFront store);
         List<Order> GetCustomerOrder(int CustomerId);
         List<Order> GetCustomerOrderNewest(int CustomerId);
-        List<Order> GetStoreOrder(int StoreId);
-        List<Order> GetStoreOrderNewest(int StoreId);
         List<LineItem> GetOrder(int Id);
-        Order CreateCart(int customerId, int StoreId);
+        Order CreateCart(int customerId);
         List<Product> GetProducts();
         Product AddProduct(Product product);
         Product GetProduct(int Id);

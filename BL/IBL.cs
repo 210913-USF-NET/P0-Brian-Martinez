@@ -21,12 +21,10 @@ namespace StoreBL
         StoreFront GetStore(int Id);
 
         //Orders
-        Order CreateCart(int customerId, int StoreId);
+        Order CreateCart(int customerId);
         Order PlaceOrder(Order order, StoreFront store);
         List<Order> GetCustomerOrder(int CustomerId);
-        List<Order> GetStoreOrder(int StoreId);
         List<Order> GetCustomerOrderNewest(int CustomerId);
-        List<Order> GetStoreOrderNewest(int StoreId);
         List<LineItem> GetOrder(int Id);
 
 
