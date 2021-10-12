@@ -95,9 +95,9 @@ namespace StoreBL
         {
             return _repo.UpdateInventory(store, item);
         }
-        public int AddInventory(int inventory, int restock)
+        public Inventory AddInventory(Inventory updateInv)
         {
-            return _repo.AddInventory(inventory, restock);
+            return _repo.AddInventory(updateInv);
         }
 
         public List<Order> GetCustomerOrder(int CustomerId)
@@ -117,6 +117,11 @@ namespace StoreBL
         public Inventory GetInventoryById(int StoreId, int ProductId)
         {
             return _repo.GetInventoryById(StoreId, ProductId);
+        }
+
+        public Inventory GetInventoryById(int Id)
+        {
+            return _repo.GetInventoryById(Id);
         }
 
         public Inventory CreateInventory(Inventory inventory)

@@ -24,6 +24,38 @@ namespace P1_WebUI.Controllers
             return View();
         }
 
+        public ActionResult Restock()
+        {
+            List<Inventory> allInventories = _bl.GetInventory();
+            return View(allInventories);
+        }
+
+        // GET: BrianController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View(_bl.GetInventoryById(id));
+        }
+
+        // POST: BrianController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Inventory invToUpdate)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _bl.AddInventory(invToUpdate);
+                    return RedirectToAction(nameof(Index));
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: BrianController/Create
         public ActionResult CreateStore()
         {
@@ -102,48 +134,6 @@ namespace P1_WebUI.Controllers
             catch
             {
                 return View("Index");
-            }
-        }
-
-        // GET: BrianController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: BrianController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: BrianController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: BrianController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
             }
         }
     }

@@ -39,6 +39,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductId)
+                    @*@ViewBag.Product.Name*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
@@ -55,4 +56,8 @@
     </tbody>
 </table>
 
-@Html.ActionLink("Continue Shopping", "Order", "Order")
+@Html.ActionLink("Continue Shopping", "PickStore", "Shop")
+
+<br />
+
+<a style="color:mintcream;" asp-area="" asp-controller="Order" asp-action="Checkout">Place Order</a>

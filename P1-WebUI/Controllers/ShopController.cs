@@ -12,7 +12,6 @@ namespace P1_WebUI.Controllers
     public class ShopController : Controller
     {
         public Customer currentCustomer = CustomerController.currentCustomer;
-        public StoreFront currentStore;
 
         private IBL _bl;
         public ShopController(IBL bl)
@@ -31,7 +30,7 @@ namespace P1_WebUI.Controllers
             List<StoreFront> allStores = _bl.GetAllStores();
             return View(allStores);
         }
-
+/*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PickStore(int id)
@@ -40,14 +39,14 @@ namespace P1_WebUI.Controllers
             {
                 StoreFront store = _bl.GetStore(id);
                 currentStore = store;
-                return RedirectToAction("Order", "Order", store);
+                return RedirectToAction("Order", "Order", currentStore);
             }
             catch
             {
                 ModelState.AddModelError(string.Empty, "Error in choosing store. Try again.");
                 return RedirectToAction("PickStore", "Shop");
             }
-        }
+        }*/
 
 /*        // GET: ShopController/Edit/5
         public ActionResult Order(StoreFront store)

@@ -294,12 +294,7 @@ namespace DL
         {
             /*Include(s => s.Inventory)*/
             StoreFront getStore = _context.StoreFronts.FirstOrDefault(s => s.Id == ID);
-
-            return new StoreFront()
-            {
-                Id = getStore.Id,
-                Name = getStore.Name,
-            };
+            return getStore;
         }
 
         public Inventory GetInventoryById(int StoreId, int ProductId)
@@ -312,6 +307,19 @@ namespace DL
                 StoreId = getInventory.StoreId,
                 ProductId = getInventory.ProductId,
                 Quantity =getInventory.Quantity
+            };
+        }
+
+        public Inventory GetInventoryById(int Id)
+        {
+            Inventory getInventory = _context.Inventories.FirstOrDefault(i => i.Id == Id);
+
+            return new Inventory()
+            {
+                Id = getInventory.Id,
+                StoreId = getInventory.StoreId,
+                ProductId = getInventory.ProductId,
+                Quantity = getInventory.Quantity
             };
         }
 
@@ -347,13 +355,33 @@ namespace DL
             return newQuantity;
         }
 
-        public int AddInventory(int updateInv, int restock)
+        public Inventory AddInventory(Inventory updateInv)
         {
-            Inventory test = (from i in _context.Inventories
+            Inventory test = new Inventory()
+            {
+                Id = updateInv.Id,
+                StoreId = updateInv.StoreId,
+                ProductId = updateInv.ProductId,
+                Quantity = updateInv.Quantity
+            };
+
+            test = _context.Inventories.Update(test).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Inventory()
+            {
+                Id = test.Id,
+                StoreId = test.StoreId,
+                ProductId = test.ProductId,
+                Quantity = test.Quantity
+            };
+                
+                /*(from i in _context.Inventories
                                      where i.Id == updateInv
                                      select i).SingleOrDefault();
 
-            test.Quantity = test.Quantity + restock;
+            test.Quantity = test.Quantity + restock;*/
 
             //grab row in inv db alter row then save row
             // Entity.Inventory restockInv = new Entity.Inventory()
@@ -364,12 +392,12 @@ namespace DL
             //     Quantity = (int)updateInv.Quantity + restock
             // };
 
-            test = _context.Inventories.Update(test).Entity;
+/*            test = _context.Inventories.Update(test).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
             int restockQuantity = Convert.ToInt32(test.Quantity);
 
-            return restockQuantity;
+            return restockQuantity;*/
         }
 
         public void RemoveCustomer(int Id)

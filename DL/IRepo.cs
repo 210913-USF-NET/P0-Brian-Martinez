@@ -26,9 +26,10 @@ namespace DL
         List<Inventory> GetInventory();
 
         Order PlaceOrder(Order order, StoreFront store);
-        int AddInventory(int inventory, int restock);
+        Inventory AddInventory(Inventory updateInv);
         int UpdateInventory(StoreFront store, LineItem item);
         Inventory GetInventoryById(int StoreId, int ProductId);
+        Inventory GetInventoryById(int Id);
 
 
         Inventory CreateInventory(Inventory inventory);

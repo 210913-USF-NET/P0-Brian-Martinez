@@ -34,8 +34,9 @@ namespace StoreBL
         Product GetProduct(int Id);
         List<Inventory> GetInventory();
         int UpdateInventory(StoreFront store, LineItem item);
-        int AddInventory(int inventory, int restock);
+        Inventory AddInventory(Inventory updateInv);
         Inventory GetInventoryById(int StoreId, int ProductId);
+        Inventory GetInventoryById(int Id);
 
         Inventory CreateInventory(Inventory inventory);
     }
