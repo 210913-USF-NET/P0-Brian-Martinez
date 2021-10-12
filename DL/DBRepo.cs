@@ -209,26 +209,36 @@ namespace DL
 
         public Order PlaceOrder(Order order, StoreFront store)
         {
-            foreach (LineItem item in order.LineItems)
+/*            foreach (LineItem item in order.LineItems)
             {
                 LineItem itemToAdd = new LineItem()
                 {
                     StoreId = store.Id,
                     ProductId = item.ProductId,
                     Quantity = (int)item.Quantity,
-                    OrderId = order.Id
+                    OrderId = order.Id,
                 };
-                itemToAdd = _context.Add(itemToAdd).Entity;
-                _context.SaveChanges();
-                _context.ChangeTracker.Clear();
-            }
+*//*                itemToAdd = _context.Add(itemToAdd).Entity;*/
+/*                _context.SaveChanges();
+                _context.ChangeTracker.Clear();*//*
+            }*/
 
-            order.OrderDateTime = DateTime.Now;
-            _context.Update(order);
+            DateTime now = DateTime.Now;
+            /*System.Diagnostics.Debug.WriteLine(now);*/
+            Order newOrder = new Order()
+            {
+                Id = order.Id,
+                CustomerId = order.CustomerId,
+                LineItems = order.LineItems,
+                OrderDateTime = now
+            };
+
+
+            _context.Update(newOrder);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return order;
+            return newOrder;
         }
 
         public List<Order> GetCustomerOrder(int CustomerId)
@@ -236,7 +246,8 @@ namespace DL
             return _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Order()
             {
                 Id = newOrder.Id,
-                CustomerId = newOrder.CustomerId
+                CustomerId = newOrder.CustomerId,
+                OrderDateTime = newOrder.OrderDateTime
             }).ToList();
         }
 
@@ -245,10 +256,24 @@ namespace DL
             List<Order> newestOrders = _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Order()
             {
                 Id = newOrder.Id,
-                CustomerId = newOrder.CustomerId
+                CustomerId = newOrder.CustomerId,
+                OrderDateTime = newOrder.OrderDateTime
             }).ToList();
 
             newestOrders = newestOrders.OrderBy(x => x.OrderDateTime).ToList();
+            return newestOrders;
+        }
+
+        public List<Order> GetCustomerOrderOldest(int CustomerId)
+        {
+            List<Order> newestOrders = _context.Orders.Where(o => o.CustomerId == CustomerId).Select(newOrder => new Order()
+            {
+                Id = newOrder.Id,
+                CustomerId = newOrder.CustomerId,
+                OrderDateTime = newOrder.OrderDateTime
+            }).ToList();
+
+            newestOrders = newestOrders.OrderByDescending(x => x.OrderDateTime).ToList();
             return newestOrders;
         }
 
@@ -293,8 +318,13 @@ namespace DL
         public StoreFront GetStore(int ID)
         {
             /*Include(s => s.Inventory)*/
-            StoreFront getStore = _context.StoreFronts.FirstOrDefault(s => s.Id == ID);
-            return getStore;
+            StoreFront getStore = _context.StoreFronts.Include(s => s.Inventory).FirstOrDefault(s => s.Id == ID);
+            return new StoreFront()
+            {
+                Id = getStore.Id,
+                Name = getStore.Name,
+                Inventory = getStore.Inventory
+            };
         }
 
         public Inventory GetInventoryById(int StoreId, int ProductId)

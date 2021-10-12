@@ -34,7 +34,8 @@ namespace P1_WebUI.Controllers
         {
             try
             {
-                var customer = _bl.SearchCustomer(username, password);
+                /*currentCustomer = null;*/
+                List<Customer> customer = _bl.SearchCustomer(username, password);
                 currentCustomer = customer[0];
 
                 if (customer.Count == 0)
@@ -82,10 +83,7 @@ namespace P1_WebUI.Controllers
                     if (check.Count == 0)
                     {
                         _bl.AddCustomer(customer);
-                        currentCustomer = customer;
-                        Response.Cookies.Append("CurrentCustomerId", currentCustomer.Id.ToString());
-                        Response.Cookies.Append("CurrentCustomerUsername", currentCustomer.Username);
-                        return RedirectToAction("Index", "Shop", currentCustomer);
+                        return View("Login");
                     }
                     else
                     {

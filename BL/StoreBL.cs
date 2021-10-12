@@ -109,6 +109,11 @@ namespace StoreBL
             return _repo.GetCustomerOrderNewest(CustomerId);
         }
 
+        public List<Order> GetCustomerOrderOldest(int CustomerId)
+        {
+            return _repo.GetCustomerOrderOldest(CustomerId);
+        }
+
         public List<LineItem> GetOrder(int Id)
         {
             return _repo.GetOrder(Id);

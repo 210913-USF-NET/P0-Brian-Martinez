@@ -7,7 +7,7 @@
 
 <dl class="row">
     <dd class="col" style="color:green; font-size:40px;">
-        <span style="color:mintcream">Welcome back </span> <b>@Html.DisplayFor(model => model.Username)</b>
+        <span style="color:mintcream">Welcome </span> <b>@Html.DisplayFor(model => model.Username)</b>
     </dd>
 </dl>
 <h2 style="color:mintcream;">What would you like to do?</h2>
@@ -24,7 +24,7 @@
     <div class="card-body">
         <h5 class="card-title">View Order History</h5>
         <p class="card-text">Go through previous orders and filter them by price or by date ordered.</p>
-        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="PickStore">Go to Orders</a>
+        <a class="btn btn-success" asp-area="" asp-controller="Shop" asp-action="ViewOrders">Go to Orders</a>
     </div>
 </div>
 <br />

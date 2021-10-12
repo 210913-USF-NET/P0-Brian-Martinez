@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Checkout";
+    Layout = "../Shared/_LayoutCustomer.cshtml";
 }
 
 <h1 style="color: mintcream;">View Cart</h1>
@@ -56,6 +57,7 @@
             }
         </tbody>
     </table>
+
     @Html.ActionLink("Continue Shopping", "PickStore", "Shop")
 
     <br />

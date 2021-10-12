@@ -57,6 +57,10 @@ namespace P1_WebUI.Controllers
         {
             currentOrder.LineItems = cartList;
             _bl.PlaceOrder(currentOrder, currentStore);
+            foreach (LineItem item in currentOrder.LineItems)
+            {
+                _bl.UpdateInventory(currentStore, item);
+            }
             return RedirectToAction("Index", "Shop");
         }
 

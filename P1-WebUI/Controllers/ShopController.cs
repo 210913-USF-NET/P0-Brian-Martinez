@@ -30,65 +30,33 @@ namespace P1_WebUI.Controllers
             List<StoreFront> allStores = _bl.GetAllStores();
             return View(allStores);
         }
-/*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult PickStore(int id)
+        
+        public ActionResult ViewOrders()
         {
-            try
-            {
-                StoreFront store = _bl.GetStore(id);
-                currentStore = store;
-                return RedirectToAction("Order", "Order", currentStore);
-            }
-            catch
-            {
-                ModelState.AddModelError(string.Empty, "Error in choosing store. Try again.");
-                return RedirectToAction("PickStore", "Shop");
-            }
-        }*/
-
-/*        // GET: ShopController/Edit/5
-        public ActionResult Order(StoreFront store)
-        {
-            Order currentOrder = new Order();
-            currentOrder = _bl.CreateCart(currentCustomer.Id, store.Id);
-            List<Product> allProducts = _bl.GetProducts();
-            return View(allProducts);
+            List<Order> allOrders = _bl.GetCustomerOrder(CustomerController.currentCustomer.Id);
+            return View(allOrders);
         }
 
-        // POST: ShopController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Order(Order order, Product product, int quantity)
+        public ActionResult SortDate()
         {
-            try
-            {
-                Inventory storeInv = _bl.GetInventoryById(order.StoreId, product.Id);
-                List<LineItem> cartList = new List<LineItem>();
-                if (quantity > storeInv.Quantity)
-                {
-                    ModelState.AddModelError(string.Empty, "Cannot select more than we have in stock. Try again.");
-                    return RedirectToAction("Shop", "Shop");
-                }
-                else
-                {
-                    LineItem itemToAdd = new LineItem(order.StoreId, product.Id, quantity, order.Id);
-                    cartList.Add(itemToAdd);
-                    return View("MoreShop");
-                }
-            }
-            catch
-            {
-                ModelState.AddModelError(string.Empty, "Shopping error. Try again.");
-                return RedirectToAction("Index", "Home");
-            }
-        }*/
+            List<Order> allOrders = _bl.GetCustomerOrderNewest(CustomerController.currentCustomer.Id);
+            return View(allOrders);
+        }
 
-        // GET: ShopController/Delete/5
-        public ActionResult MoreShop(List<LineItem> cart)
+        public ActionResult SortNewDate()
         {
-            return View(cart);
+            List<Order> allOrders = _bl.GetCustomerOrderOldest(CustomerController.currentCustomer.Id);
+            return View(allOrders);
+        }
+
+        public ActionResult Details(int id)
+        {
+            List<LineItem> orderDetails = _bl.GetOrder(id);
+            foreach(LineItem item in orderDetails)
+            {
+                item.item = _bl.GetProduct(item.ProductId);
+            }
+            return View(orderDetails);
         }
 
         // POST: ShopController/Delete/5
