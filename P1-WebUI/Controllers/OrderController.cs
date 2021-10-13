@@ -56,7 +56,7 @@ namespace P1_WebUI.Controllers
             {
                 _bl.UpdateInventory(currentStore, item);
             }
-
+            cartList.Clear();
             return RedirectToAction("Index", "Shop");
         }
 
