@@ -133,5 +133,10 @@ namespace StoreBL
         {
             return _repo.CreateInventory(inventory);
         }
+
+        public LineItem UpdateLineItem(LineItem item)
+        {
+            return _repo.UpdateLineItem(item);
+        }
     }
 }

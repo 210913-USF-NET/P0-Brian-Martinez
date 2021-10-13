@@ -49,7 +49,7 @@ namespace DL
         /// <returns></returns>
         public List<Customer> GetAllCustomers()
         {
-            return _context.Customers.AsNoTracking().Select(
+            List<Customer> allCustos = _context.Customers.AsNoTracking().Select(
                 customer => new Customer()
                 {
                     Id = customer.Id,
@@ -58,8 +58,16 @@ namespace DL
                     Age = customer.Age
                 }
             ).ToList();
+
+            allCustos = allCustos.OrderBy(x => x.Id).ToList();
+            return allCustos;
         }
 
+        /// <summary>
+        /// gooes through the DB's list of customers, and finds the customer with taken Id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public Customer GetCustomerById(int Id)
         {
             Customer customer = _context.Customers
@@ -75,6 +83,11 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// updates customer's variables
+        /// </summary>
+        /// <param name="customerToUpdate"></param>
+        /// <returns></returns>
         public Customer UpdateCustomer(Customer customerToUpdate)
         {
             Customer custToUpdate = new Customer()
@@ -93,7 +106,29 @@ namespace DL
         }
 
         /// <summary>
-        /// returns customer or list of customers where parameter equals last name 
+        /// edits the quantity of the lineitem in the cart
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public LineItem UpdateLineItem(LineItem item)
+        {
+            LineItem itemToUpdate = new LineItem()
+            {
+                StoreId = item.StoreId,
+                ProductId = item.ProductId,
+                Quantity = item.Quantity,
+                OrderId = item.OrderId
+            };
+
+            itemToUpdate = _context.LineItems.Update(itemToUpdate).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return itemToUpdate;
+        }
+
+        /// <summary>
+        /// returns list of customers where parameter equals last name 
         /// </summary>
         /// <param name="queryStr"></param>
         /// <returns></returns>
@@ -112,6 +147,11 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// searches through customers for one with matching username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public List<Customer> Search(string username)
         {
             return _context.Customers.Where(
@@ -188,6 +228,11 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// creates shopping cart with a customer's Id
+        /// </summary>
+        /// <param name="CustomerId"></param>
+        /// <returns></returns>
         public Order CreateCart(int CustomerId)
         {
             // Entity.Order cart = new Entity.Order() { };
@@ -207,22 +252,14 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// places cart with lineitems to the DB
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="store"></param>
+        /// <returns></returns>
         public Order PlaceOrder(Order order, StoreFront store)
         {
-/*            foreach (LineItem item in order.LineItems)
-            {
-                LineItem itemToAdd = new LineItem()
-                {
-                    StoreId = store.Id,
-                    ProductId = item.ProductId,
-                    Quantity = (int)item.Quantity,
-                    OrderId = order.Id,
-                };
-*//*                itemToAdd = _context.Add(itemToAdd).Entity;*/
-/*                _context.SaveChanges();
-                _context.ChangeTracker.Clear();*//*
-            }*/
-
             DateTime now = DateTime.Now;
             /*System.Diagnostics.Debug.WriteLine(now);*/
             Order newOrder = new Order()
@@ -232,7 +269,6 @@ namespace DL
                 LineItems = order.LineItems,
                 OrderDateTime = now
             };
-
 
             _context.Update(newOrder);
             _context.SaveChanges();
@@ -292,7 +328,7 @@ namespace DL
 
         public List<Product> GetProducts()
         {
-            return _context.Products.Select(
+            List<Product> allProducts = _context.Products.Select(
             product => new Product()
             {
                 Id = product.Id,
@@ -300,7 +336,10 @@ namespace DL
                 Price = (int)product.Price,
                 Description = product.Description
             }
-        ).ToList();
+            ).ToList();
+
+            allProducts = allProducts.OrderBy(x => x.Id).ToList();
+            return allProducts;
         }
 
         public Product GetProduct(int Id)
@@ -355,7 +394,7 @@ namespace DL
 
         public List<Inventory> GetInventory()
         {
-            return _context.Inventories.Select(
+            List<Inventory> allInv = _context.Inventories.Select(
                 Inventory => new Inventory()
                 {
                     Id = Inventory.Id,
@@ -364,6 +403,9 @@ namespace DL
                     Quantity = Inventory.Quantity
                 }
             ).ToList();
+
+            allInv = allInv.OrderBy(x => x.Id).ToList();
+            return allInv;
         }
 
         public int UpdateInventory(StoreFront store, LineItem item)

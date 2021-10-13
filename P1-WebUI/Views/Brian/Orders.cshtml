@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1 style="color:mintcream;">Orders</h1>
+
+<table class="table">
+    <thead style="color:mintcream;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody style="color:mintcream;">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDateTime)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.Id })
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Customers" style="color: mintcream;">Back to Customers</a>
+</div>

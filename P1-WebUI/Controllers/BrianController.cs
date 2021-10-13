@@ -62,6 +62,23 @@ namespace P1_WebUI.Controllers
             return View(allCustomers);
         }
 
+        public ActionResult Orders(int id)
+        {
+            List<Order> customerOrders = _bl.GetCustomerOrder(id);
+            return View(customerOrders);
+        }
+
+        public ActionResult Details(int id)
+        {
+            List<LineItem> orderDetails = _bl.GetOrder(id);
+            foreach (LineItem item in orderDetails)
+            {
+                item.item = _bl.GetProduct(item.ProductId);
+                item.Store = _bl.GetStore((int)item.StoreId);
+            }
+            return View(orderDetails);
+        }
+
         // GET: BrianController/Create
         public ActionResult CreateStore()
         {

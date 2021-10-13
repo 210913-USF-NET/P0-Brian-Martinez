@@ -38,6 +38,7 @@ namespace StoreBL
         Inventory AddInventory(Inventory updateInv);
         Inventory GetInventoryById(int StoreId, int ProductId);
         Inventory GetInventoryById(int Id);
+        LineItem UpdateLineItem(LineItem item);
 
         Inventory CreateInventory(Inventory inventory);
     }

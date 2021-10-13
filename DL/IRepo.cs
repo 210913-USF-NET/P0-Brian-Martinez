@@ -31,7 +31,7 @@ namespace DL
         int UpdateInventory(StoreFront store, LineItem item);
         Inventory GetInventoryById(int StoreId, int ProductId);
         Inventory GetInventoryById(int Id);
-
+        LineItem UpdateLineItem(LineItem item);
 
         Inventory CreateInventory(Inventory inventory);
     }

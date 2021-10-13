@@ -43,16 +43,12 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.OrderId)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
                 </tr>
             }
         </tbody>
     </table>
 
-    @{ 
+    @{
         int total = 0;
         string totalString = "";
         foreach (var item in Model)
@@ -65,6 +61,8 @@
     <h3 style="color:mintcream">TOTAL: $@totalString</h3>
 
     @Html.ActionLink("Continue Shopping", "PickStore", "Shop", null, new { @class = "btn btn-success" })
+    <span style="color: #202120">o</span>
+    @Html.ActionLink("Clear Cart", "ClearCart", "Order", null, new { @class = "btn btn-success" })
     <span style="color: #202120">o</span>
     @Html.ActionLink("Place Order", "PlaceOrder", "Order", null, new { @class = "btn btn-success" })
 </form>
