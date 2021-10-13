@@ -4,15 +4,17 @@
     ViewData["The Beer Garden"] = "Home Page";
 }
 
-<div class="text-center">
-    <br />
-    <h1 class="display-4" style="color:mintcream;">Welcome to <b style="color:green">The Beer Garden</b></h1>
-    <br />
-    <p style="font-size:20px; color:mintcream;">Shop for your favorite brew selections at whichever store you like!</p>
-</div>
+<div>
+    <div class="text-center">
+        <br />
+        <h1 class="display-3" style="color: mintcream; font-weight: 700;">Welcome to <b style="color:green">The Beer Garden</b></h1>
+        <br />
+        <p class="h3" style="font-size: 30px; color: mintcream; font-weight: 700;">Shop for your favorite brew selections at whichever store you like!</p>
+    </div>
 
-<div class="text-center" style="margin-top:120px">
-    <a class="btn btn-success btn-lg" asp-area="" asp-controller="Customer" asp-action="Login">Log In</a>
-    <p style="font-size:20px; color:mintcream; margin-top:15px;">or</p>
-    <a class="btn btn-outline-success btn-lg" asp-area="" asp-controller="Customer" asp-action="Signup">Sign Up</a>
+    <div class="text-center" style="margin-top:120px">
+        <a class="btn btn-success btn-lg" style="font-size: 30px;" asp-area="" asp-controller="Customer" asp-action="Login">Log In</a>
+        <p style="font-size: 30px; color: mintcream; margin-top: 15px; font-weight: 800;">or</p>
+        <a class="btn btn-success btn-lg" style="font-size: 30px;" asp-area="" asp-controller="Customer" asp-action="Signup">Sign Up</a>
+    </div>
 </div>
