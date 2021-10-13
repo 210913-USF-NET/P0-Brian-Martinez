@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace P1_WebUI.Controllers
 {
@@ -44,6 +45,7 @@ namespace P1_WebUI.Controllers
             itemToAdd.item = _bl.GetProduct(itemToAdd.ProductId);
             /*itemToAdd = _bl.AddLineItem(itemToAdd);*/
             cartList.Add(itemToAdd);
+            Log.Information($"LineItem added to cart");
             return View(cartList);
         }
 
@@ -57,6 +59,7 @@ namespace P1_WebUI.Controllers
                 _bl.UpdateInventory(currentStore, item);
             }
             cartList.Clear();
+            Log.Information($"Order successfully placed");
             return RedirectToAction("Index", "Shop");
         }
 

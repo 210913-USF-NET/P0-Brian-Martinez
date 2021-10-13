@@ -8,6 +8,7 @@ using StoreBL;
 using Models;
 using P1_WebUI.Models;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace P1_WebUI.Controllers
 {
@@ -50,10 +51,12 @@ namespace P1_WebUI.Controllers
                     Response.Cookies.Append("CurrentCustomerUsername", currentCustomer.Username);*/
                     if (username == "brian" && password == "brian")
                     {
+                        Log.Information("Admin logged in");
                         return RedirectToAction("Index", "Brian");
                     }
                     else
                     {
+                        Log.Information($"{currentCustomer.Username} logged in");
                         currentOrder = _bl.CreateCart(currentCustomer.Id);
                         return RedirectToAction("Index", "Shop", currentCustomer);
                     }
@@ -90,6 +93,7 @@ namespace P1_WebUI.Controllers
                         }
                         else
                         {
+                            Log.Information($"{customer.Username} successfully signed up.");
                             _bl.AddCustomer(customer);
                             return View("Login");
                         }

@@ -56,6 +56,12 @@ namespace P1_WebUI.Controllers
             }
         }
 
+        public ActionResult Customers()
+        {
+            List<Customer> allCustomers = _bl.GetAllCustomers();
+            return View(allCustomers);
+        }
+
         // GET: BrianController/Create
         public ActionResult CreateStore()
         {
