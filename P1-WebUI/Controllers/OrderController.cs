@@ -40,12 +40,6 @@ namespace P1_WebUI.Controllers
 
         public ActionResult Checkout(int id, int item, int quantity)
         {
-/*            Product product = _bl.GetProduct(item);
-            ViewBag.Product = product;
-
-            StoreFront store = _bl.GetStore(id);
-            ViewBag.StoreFront = store;*/
-
             LineItem itemToAdd = new LineItem(currentStore.Id, item, quantity, currentOrder.Id);
             itemToAdd.item = _bl.GetProduct(itemToAdd.ProductId);
             /*itemToAdd = _bl.AddLineItem(itemToAdd);*/
@@ -62,6 +56,7 @@ namespace P1_WebUI.Controllers
             {
                 _bl.UpdateInventory(currentStore, item);
             }
+
             return RedirectToAction("Index", "Shop");
         }
 
