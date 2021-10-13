@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StoreBL;
 using Models;
 using P1_WebUI.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace P1_WebUI.Controllers
 {
@@ -82,8 +83,16 @@ namespace P1_WebUI.Controllers
                     var check = _bl.Search(customer.Username);
                     if (check.Count == 0)
                     {
-                        _bl.AddCustomer(customer);
-                        return View("Login");
+                        if(customer.Age < 21)
+                        {
+                            ModelState.AddModelError(string.Empty, "Underage people are not allowed. So grow up.");
+                            return View("Signup");
+                        }
+                        else
+                        {
+                            _bl.AddCustomer(customer);
+                            return View("Login");
+                        }
                     }
                     else
                     {

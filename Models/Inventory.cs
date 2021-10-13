@@ -17,8 +17,8 @@ namespace Models
         public int? ProductId { get; set; }
         public int? Quantity { get; set; }
 
-        public virtual Product Product { get; set; }
-        public virtual StoreFront Store { get; set; }
+        public Product Product { get; set; }
+        public StoreFront Store { get; set; }
 
         public override string ToString()
         {

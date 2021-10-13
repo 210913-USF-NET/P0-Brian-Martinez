@@ -55,23 +55,20 @@ namespace P1_WebUI.Controllers
             foreach(LineItem item in orderDetails)
             {
                 item.item = _bl.GetProduct(item.ProductId);
+                item.Store = _bl.GetStore((int)item.StoreId);
             }
             return View(orderDetails);
         }
 
-        // POST: ShopController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult ViewProducts()
         {
-            try
+            List<Inventory> allInventories = _bl.GetInventory();
+            foreach(Inventory item in allInventories)
             {
-                return RedirectToAction(nameof(Index));
+                item.Product = _bl.GetProduct((int)item.ProductId);
+                item.Store = _bl.GetStore((int)item.StoreId);
             }
-            catch
-            {
-                return View();
-            }
+            return View(allInventories);
         }
     }
 }
